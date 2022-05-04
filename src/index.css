@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,7 +12,170 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+
+
+/* Header */
+
+
+.header {
+  padding: 0 120px;
+  /* background-color: lightpink; */
+}
+
+.header__block {
+  display: flex;
+  justify-content: space-between;
+  backdrop-filter: blur(30px);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+}
+
+.header__right {
+  align-items: center;
+}
+
+.header__logo {
+  font-family: TT Firs Neue;
+  width: 255px;
+}
+
+.header__main {
+  font-size: 40px;
+  padding-left: 84px;
+  font-family: PH NavPanel Headline;
+  padding-top: 14px;
+  color: #7D63AD;
+}
+
+.header__test {
+  font-size: 40px;
+  padding-left: 84px;
+  font-family: PH NavPanel Headline;
+  padding-top: 14px;
+  color: #7D63AD;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header__profile__photo {
+  /* position: absolute; */
+  width: 92px;
+  /* height: 60px; */
+}
+
+.header__back__logos {
+  display: flex;
+  justify-content: center;
+}
+
+
+.square__one {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 5px solid #000;
+  left: 400px;
+}
+
+
+
+
+/* Profile */
+
+
+.profile {
+  padding: 50px 120px 0 120px;
+}
+
+.profile__user {
+  display: flex;
+}
+
+.profile__user__img {
+  width: 230px;
+}
+
+.profile__user__data {
+  margin-left: 40px;
+  margin-top: 25px;
+}
+
+.profile__user__name {
+  font-family: TT Firs Neue;
+  font-size: 37px;
+}
+
+.profile__user__mail {
+  font-family: TT Firs Neue;
+  font-size: 25px;
+  color: #5E5E5E;
+  margin-top: 47px;
+}
+
+.profile__user__change {
+  margin-top: 48px;
+  color: #5E5E5E;
+  border-bottom: 1px solid black;
+  border-width: 1px;
+  width: 110px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.profile__last__tests .profile__last__tests__title {
+  font-style: TT Firs Neue;
+  font-size: 40px;
+  color: #000000;
+  margin-top: 42px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  line-height: 36px;
+}
+
+.profile__last__test:not(:last-child) {
+  margin-bottom: 24px;
+}
+
+.profile__last__test {
+  height: 82px;
+  padding: 0 28px;
+  border-radius: 30px;
+  /* margin-bottom: 24px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid #7D63AD;
+  font-size: 25px;
+}
+
+.profile__button__more__div {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.profile__button__more {
+  width: 404px;
+    height: 82px;
+    background-color: #7D63AD;
+    border-radius: 30px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-size: 30px; 
+}
+
+.bottom__text {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  text-align: center;
 }
