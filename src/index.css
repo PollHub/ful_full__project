@@ -130,7 +130,7 @@ a {
   margin-right: 10px;
   border-bottom: 1px solid black;
   border-width: 1px;
-  width: 110px;
+  width: 76px;
   font-size: 16px;
   cursor: pointer;
 }
@@ -164,6 +164,14 @@ a {
   width: 1122px;
 }
 
+.profile__last__test__right {
+  display: flex;
+}
+
+.profile__last__test__procent {
+  margin-right: 10px;
+}
+
 .profile__button__more__div {
   display: flex;
   justify-content: center;
@@ -186,4 +194,16 @@ a {
   margin-bottom: 20px;
   margin-top: 15px;
   text-align: center;
+}
+
+.high__level__test {
+  border: 2px solid green;
+}
+
+.medium__level__test {
+  border: 2px solid orange;
+}
+
+.law__level__test {
+  border: 2px solid red;
 }

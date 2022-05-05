@@ -4,7 +4,13 @@ import { Link } from "react-router-dom";
 
 function Profile() {
 
-    let [counter, setCounter] = useState([0,1,2,3,4])
+    // let [counter, setCounter] = useState([0,1,2,3,4])
+    let [counter, setCounter] = useState([
+        {id: 0, title: 'Математика / Таблица умножения 1.1', grade: "3/5", procent: 30},
+        {id: 1, title: 'Математика / Тигонометрия', grade: "5/5", procent: 100},
+        {id: 2, title: 'Математика / Тигонометрия', grade: "5/5", procent: 10},
+        {id: 3, title: 'Математика / Тигонометрия', grade: "5/5", procent: 80}
+    ])
 
     function show() {}
 
@@ -18,17 +24,18 @@ function Profile() {
                     <p className="profile__user__change">Изменить</p>
                 </div>
             </div>
-            <div className="profile__last__tests">
+            <div className={"profile__last__tests"}>
                 <p className="profile__last__tests__title">Недавние тесты</p>
                 {counter.map(e => {
                     return (
-                        <div key={e} className="profile__last__test">
+                        <div key={e} className={e.procent < 60 ? 'profile__last__test medium__level__test' : 'profile__last__test high__level__test'}>
                             <div>
-                                <p className="profile__last__test__title">Математика / Таблица умножения 1.1</p>
+                                <p className="profile__last__test__title">{e.title}</p>
                             </div>
-                            <div>
+                            <div className="profile__last__test__right">
+                                <p className="profile__last__test__procent">{e.procent}</p>
                                 <p className="profile__last__test__level">
-                                    4/5
+                                    {e.grade}
                                 </p>
                             </div>
                         </div>
