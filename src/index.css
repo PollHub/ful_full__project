@@ -207,3 +207,17 @@ a {
 .law__level__test {
   border: 2px solid red;
 }
+
+.change__block {
+  position: absolute;
+  width: 710px;
+  height: 783px;
+  left: 365px;
+  top: 110px;
+  border: 1px solid #000;
+  background-color: white;
+}
+
+.close__change__block {
+  display: none;
+}

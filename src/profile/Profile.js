@@ -12,7 +12,12 @@ function Profile() {
         {id: 3, title: 'Математика / Тигонометрия', grade: "5/5", procent: 80}
     ])
 
-    function show() {}
+    let [active, setActive] = useState(false);
+
+    function show() {
+        console.log(active);
+        setActive(!active)
+    }
 
     return (
         <div className="profile">
@@ -21,19 +26,19 @@ function Profile() {
                 <div className="profile__user__data">
                     <p className="profile__user__name">Дмитрий Шишков (Пользователь)</p>
                     <p className="profile__user__mail">SHishkov_dev2.19@st.ithub.ru</p>
-                    <p className="profile__user__change">Изменить</p>
+                    <p className="profile__user__change" onClick={() => {show()}}>Изменить</p>
                 </div>
             </div>
             <div className={"profile__last__tests"}>
                 <p className="profile__last__tests__title">Недавние тесты</p>
                 {counter.map(e => {
                     return (
-                        <div key={e} className={e.procent < 60 ? 'profile__last__test medium__level__test' : 'profile__last__test high__level__test'}>
+                        <div key={e.id} className={e.procent < 60 ? 'profile__last__test medium__level__test' : 'profile__last__test high__level__test'}>
                             <div>
                                 <p className="profile__last__test__title">{e.title}</p>
                             </div>
                             <div className="profile__last__test__right">
-                                <p className="profile__last__test__procent">{e.procent}</p>
+                                <p className="profile__last__test__procent">{e.procent}%</p>
                                 <p className="profile__last__test__level">
                                     {e.grade}
                                 </p>
@@ -43,13 +48,12 @@ function Profile() {
                 })}
             </div>
             <div className="profile__button__more__div">
-                <button className="profile__button__more">
-                    Посмотреть еще
-                </button>
+                {counter.length < 5 ? }
             </div>
             <div className="bottom__text">
-                <p onClick={() => {show()}}>PollHub | 2022</p>
+                <p>PollHub | 2022</p>
             </div>
+            <div className={active ? 'change__block' : 'close__change__block'}></div>
         </div>
     )
 }
