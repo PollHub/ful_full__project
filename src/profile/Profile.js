@@ -48,7 +48,11 @@ function Profile() {
                 })}
             </div>
             <div className="profile__button__more__div">
-                {counter.length < 5 ? }
+                {counter.length > 5 ?
+                    <button className="profile__button__more">Посмотреть еще</button>
+                    :
+                    <div></div>
+                }
             </div>
             <div className="bottom__text">
                 <p>PollHub | 2022</p>

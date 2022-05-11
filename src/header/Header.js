@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import userLogo from '../img/PollHub.svg';
 import user from '../img/userImg.svg'
+import font from '../fonts/TTFirsNeue-Black.woff';
+console.log(font);
 
 function Header() {
     return (
@@ -17,9 +19,10 @@ function Header() {
                     <Link to={'/'}>
                         <p className="header__main">Главная</p>
                     </Link>
-                    <Link>
+                    <Link to={'/create'}>
                         <p className="header__test">Тесты</p>
                     </Link>
+                    {/* <p style={{'fontFamily': 'revert', 'fontSize': 36}}>Главная</p> */}
                 </div>
                 <div className="header__right">
                     <Link to={'/profile'}>
