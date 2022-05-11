@@ -232,10 +232,11 @@ a {
 
 
 .Create {
-  padding: 30px 120px 0 120px;
+  padding: 30px 120px 50px 120px;
   /* background-color: #7D63AD; */
-  position: relative;
-  height: 700px;
+  /* position: relative; */
+  /* height: 700px;
+  margin-bottom: 100px; */
 }
 
 .create__title {
@@ -338,7 +339,6 @@ a {
   position: absolute;
   bottom: 0;
   right: 120px;
-  margin-top: 200px;
 }
 
 .back__button {
@@ -347,32 +347,42 @@ a {
   left: 120px;
 }
 
-.back__button button {
+.backk__button {
   width: 404px;
-    height: 82px;
-    background: #C4C4C4;
-    border-radius: 30px;
-    border: none;
-    font-family: 'TT Firs Neue';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 31px;
-    color: #FFFFFF;
+  height: 82px;
+  background: #7D63AD;
+  border-radius: 30px;
+  border: none;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  color: #FFFFFF;
+  cursor: pointer;
+  margin-bottom: 20px
 }
 
-.further__button button {
+.next__button {
   width: 404px;
-    height: 82px;
-    background: #C4C4C4;
-    border-radius: 30px;
-    border: none;
-    font-family: 'TT Firs Neue';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 31px;
-    color: #FFFFFF;
+  height: 82px;
+  background: #C4C4C4;
+  border-radius: 30px;
+  border: none;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  color: #FFFFFF;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.bottom__buttons {
+  padding: 0 120px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .create__question__block {
