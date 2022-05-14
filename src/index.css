@@ -1,3 +1,21 @@
+/* @font-face {
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/Font/TT Firs/TTFirsNeue-Regular.woff2') format('woff2'), url('/Font/TT Firs/TTFirsNeue-Regular.ttf') format('ttf'), url('/Font/TT Firs/TTFirsNeue-Regular.eot') format('eot'), url('/Font/TT Firs/TTFirsNeue-Regular.woff') format('woff'),
+} */
+
+@font-face {
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../Font/TT Firs/TTFirsNeue-Regular.woff2') format('woff2'), 
+  url('../Font/TT Firs/TTFirsNeue-Regular.ttf') format('ttf'), 
+  url('../Font/TT Firs/TTFirsNeue-Regular.eot') format('eot')
+  url('../Font/TT Firs/TTFirsNeue-Regular.woff') format('woff');
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -5,19 +23,10 @@
 
 body {
   margin: 0;
-  font-family: TTFirsNeue-Italic;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 400;
 }
-
-@font-face {
-  font-family: TTFirsNeue-Italic;
-  src: 
-  local('TTFirsNeue-Italic'),
-  url('./fonts/TTFirsNeue-Italic.woff'), 
-  format('woff');
-}
-
-
-
 
 /* Header */
 
@@ -258,14 +267,84 @@ a {
   margin-top: 24px;
 }
 
-.Create select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
+.form-group {
+  width: 600px;
+  /* height: 60px; */
+  border: 2px solid #7D63AD;
+  box-sizing: border-box;
+  border-radius: 30px;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  color: #C4C4C4;
+  outline: none;
+  padding: 15px 16px 15px 36px;
+  margin-top: 24px;
 }
 
-.Create select::-ms-expand {
-  display: none;
+.form-group-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group-right {
+  display: flex;
+  align-items: center;
+}
+
+.first__bottom__buttons {
+  display: flex;
+  justify-content: right;
+  align-items: flex-end;
+  height: 390px;
+}
+
+.form-group-right-img {
+  cursor: pointer;
+}
+
+.form-group-left {
+  display: flex;
+  align-items: center;
+}
+
+.form__group__list {
+  width: 600px;
+  /* height: 611px; */
+  border: 2px solid #7D63AD;
+  box-sizing: border-box;
+  border-radius: 30px;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  color: #C4C4C4;
+  outline: none;
+  padding: 15px 36px 24px 36px;
+  margin-top: 24px;
+  /* position: absolute; */
+}
+
+.form__group__list__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form__group__list__top__left {
+  display: flex;
+  align-items: center;
+}
+
+.form__group__list__list__text {
+  font-size: 24px;
+  color: #7D63AD;
+  border-bottom: 1px solid #C4C4C4;
+  padding-bottom: 24px;
+  margin-top: 24px;
+  cursor: pointer;
 }
 
 .discipline__select {
@@ -335,6 +414,10 @@ a {
   padding: 15px 16px 15px 36px;
 }
 
+.name__test__input::placeholder {
+  color: #7D63AD;
+}
+
 .further__button {
   position: absolute;
   bottom: 0;
@@ -383,16 +466,18 @@ a {
   padding: 0 120px;
   display: flex;
   justify-content: space-between;
+  margin-top: 140px;
 }
 
 .create__question__block {
-  width: 1200px;
+  /* width: 1200px; */
   background: #FFFFFF;
   border: 2px solid #7D63AD;
   box-sizing: border-box;
   border-radius: 30px;
   padding: 24px 24px;
   margin-top: 24px;
+  /* margin: 0 auto; */
 }
 
 .create__question__block__top {
@@ -425,7 +510,7 @@ a {
 
 .create__question__block__answers {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   flex-wrap: wrap;
 }
 
@@ -453,4 +538,33 @@ a {
   box-sizing: border-box;
   border-radius: 30px;
   padding: 20px 46px;
+}
+
+.addButton {
+  padding-top: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.create__question__block__answers__answer__right {
+  display: flex;
+  align-items: center;
+}
+
+.create__question__block__answers__answer__left {
+  display: flex;
+  align-items: center;
+}
+
+.create__question__block__answers__answer__left p {
+  margin-left: 10px;
+}
+
+.create__question__block__bottom__right__img {
+  margin-right: 5px;
+}
+
+.more__block {
+  display: flex;
 }

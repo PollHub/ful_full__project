@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import userLogo from '../img/PollHub.svg';
 import user from '../img/userImg.svg'
-import font from '../fonts/TTFirsNeue-Black.woff';
-console.log(font);
 
 function Header() {
     return (
