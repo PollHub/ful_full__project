@@ -55,7 +55,7 @@ function Create() {
 
     let [questions, setQuestions] = useState([{id: id()}])
 
-    let [subject, setSubject] = useState('Photoshop');
+    let [subject, setSubject] = useState('Выберите предмет');
 
     let [list, setList] = useState(false);
 
@@ -65,7 +65,7 @@ function Create() {
 
     // let history = useHistory()
 
-    let [page, setPage] = useState(0);
+    let [page, setPage] = useState(1);
 
     if (page === 0) {
         return (
@@ -119,7 +119,7 @@ function Create() {
                 </div>
                 <div className="first__bottom__buttons">
                         {
-                            title === ''
+                            title === '' && subject != 'Выберите предмет'
                             ?
                             <button disabled className="next__button" onClick={() => {setPage(1)}}>
                                 Далее
