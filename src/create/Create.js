@@ -6,14 +6,79 @@ import answer from '../img/16.png';
 import photo17 from '../img/17.png';
 import photo18 from '../img/18.png';
 import photo19 from '.././img/19.png';
+import photo20 from '.././img/20.png';
+import photo21 from '.././img/21.png';
 
 
 function Create() {
 
+    // function trueButton(id) {
+    //     let trueButton = document.querySelectorAll('.trueButton');
+    //     let falseButton = document.querySelectorAll('.falseButtonChecked');
+    //     let falseChecked = null;
+
+    //     falseButton.forEach(e => {
+    //         if (e.id === id) {
+    //             falseChecked = e;
+    //         }
+    //     })
+
+    //     // console.log(falseChecked)
+
+    //     trueButton.forEach(e => {
+    //         if (falseChecked.classList[0] === 'falseButtonChecked') {
+    //             if (e.id === id) {
+    //                 e.classList = 'trueButtonChecked';
+    //                 falseChecked.classList = 'falseButton'
+    //             }
+    //         } else if (e.id === id) {
+    //             e.classList = 'trueButtonChecked'
+    //         }
+    //     })
+    //     console.log(id)
+    // }
+
+    function trueButton(id, blockId) {
+        let questionBlocks = document.querySelectorAll('.create__question__block');
+        let copy = answerCounter
+
+        copy.map((i) => {
+            if (i.id === blockId) {
+                // console.log(i.answers)
+                i.true__answer = id
+            }
+        })
+        setAnswerCounter([...copy])
+    }
+
+    function DelAnswer(idd, name) {
+        let counter = null
+        let questions = answerCounter;
+        let object = null
+        answerCounter.map((i, n) => {
+            if (i.id === name) {
+                object = i
+                counter = n
+            }
+        })
+        // console.log(object)
+        let n = object.answers.filter(e => e.id !== idd)
+        questions[counter].answers = n
+        setAnswerCounter([...questions])
+        // setNum(id())
+
+        console.log(answerCounter)
+    }
+
+    function DelQuestion(name) {
+        let change = answerCounter.filter(e => e.id !== name)
+        console.log(answerCounter)
+        setAnswerCounter(change)
+    }
+
     function addAnswer(name) {
-        // console.log(id)
         let local = answerCounter;
-        let que = {id: id()}
+        let que = {id: id(), name: 'Ответ'}
         setAnswerCounter(34)
         local.forEach((e) => {
             if (name === e.id) {
@@ -24,6 +89,7 @@ function Create() {
         setAnswerCounter([...local]);
         // setNum(id())
         // console.log(local)
+        console.log(answerCounter)
     }
 
     function id() {
@@ -37,27 +103,40 @@ function Create() {
             ...answerCounter,
             {
                 id: id(),
-                answers: [{id: id()}]
+                title: 'Вопрос',
+                true__answer: null,
+                answers: [{id: id(), name: 'Ответ'}]
             }
         ])
         // console.log(answerCounter)
     }
 
-    let [questionElemnt, setQuestionElemnt] = useState();
+    const [answers, setAnswers] = useState([]);
 
-    let [answersElement, setAnswersElement] = useState();
+    const [questionElemnt, setQuestionElemnt] = useState();
+
+    const [answersElement, setAnswersElement] = useState();
 
     let [answerCounter, setAnswerCounter] = useState( 
-        [{ id: id(), answers: [{id: id()}] }]     
+        [
+            {
+                id: id(),
+                title: 'Вопрос',
+                true__answer: null,
+                answers: [
+                    {
+                        name: 'Ответ',
+                        id: id()
+                    }
+                ]
+            }
+        ]     
     );
-
-    let [questionInput, setQuestionInput] = useState('');
-
-    let [questions, setQuestions] = useState([{id: id()}])
 
     let [subject, setSubject] = useState('Выберите предмет');
 
     let [list, setList] = useState(false);
+
 
     let [subjects, setSubjects] = useState(['Математика', "Англ.Яз", "История", "Питон"])
 
@@ -65,7 +144,44 @@ function Create() {
 
     // let history = useHistory()
 
-    let [page, setPage] = useState(1);
+    let [page, setPage] = useState(0);
+
+    function text(id, blockId, text) {
+        let copy = answerCounter
+
+        copy.map((i) => {
+            if (i.id === blockId) {
+                i.answers.map((e) => {
+                    if(e.id === id) {
+                        e.name = text
+                    }
+                })
+            }
+        })
+        setAnswerCounter([...copy])
+    }
+
+    function questionText(blockId, text) {
+        let copy = answerCounter;
+
+        copy.map((i) => {
+            if (i.id === blockId) {
+                i.title = text
+            }
+        })
+    }
+
+    // Settimgs function and data
+
+    const [settingsActive, setSettingsActive] = useState(false);
+
+    const [passTask, setPassTask] = useState(false);
+
+    const [editTest, setEditTest] = useState(false);
+
+    const [timerTest, setTimerTest] = useState(false);
+
+    const [mixTest, setMixTest] = useState(false);
 
     if (page === 0) {
         return (
@@ -134,19 +250,133 @@ function Create() {
         )
     } else if (page === 1) {
         return(
-            <div>
-                {/* <Questions/> */}
+            <>
+            <div className={settingsActive ? 'test__settings__block' : 'close__test__settings__block'}>
+                    <div className="test__settings__block__top">
+                        <p className="test__settings__block__top__title">Настройки теста</p>
+                        <img src={photo20} onClick={() => {setSettingsActive(false)}} className="test__settings__block__top__close"/>
+                    </div>
+                    <div className="pass__question__checkbox">
+                        <div>
+                            <p className="pass__question__checkbox__text">
+                                Пропустить задание
+                            </p>
+                        </div>
+                        <div className="pass__question__checkbox__right">
+                            <input onClick={() => {setPassTask(!passTask)}} className="pass__question__checkbox__input" type="checkbox"/>
+                            <p className="under__checkbox__text">{passTask ? 'Вкл' : 'Выкл'}</p>
+                        </div>
+                    </div>
+                    <div className="editing__test__checkbox">
+                        <p className="editing__test__checkbox__text">Редактирование</p>
+                        <div>
+                            <input className="editing__test__checkbox__input" type="checkbox"/>
+                            <p className="under__checkbox__text">Выкл</p>
+                        </div>
+                    </div>
+                    <div className="timer__test__checkbox">
+                        <div className="timer__test__checkbox__left">
+                            <p className="timer__test__checkbox__left__text">Таймер</p>
+                        </div>
+                        <div className="timer__test__checkbox__right">
+                            <input onClick={() => {setTimerTest(!timerTest)}} className="timer__test__checkbox__right__input" type="checkbox"/>
+                            <p className="under__checkbox__text">{timerTest ? "Вкл" : "Выкл"}</p>
+                        </div>
+                    </div>
+                    <div className="mix__test__checkbox">
+                        <div className="mix__test__checkbox__left">
+                            <p className="mix__test__checkbox__left__text">Перемешать вопросы</p>
+                        </div>
+                        <div className="mix__test__checkbox__right">
+                            <input onClick={() => {setMixTest(!mixTest)}} className="mix__test__checkbox__right__input" type="checkbox"/>
+                            <p className="under__checkbox__text">{mixTest ? 'Вкл' : 'Выкл'}</p>
+                        </div>
+                    </div>
+                    <div className={timerTest ? 'timer__test__checkbox__setting' : "timer__test__checkbox__setting__close"}>
+                        <div className="timer__test__checkbox__setting__left">
+                            <p className="timer__test__checkbox__setting__left__text">45 минут</p>
+                        </div>
+                        <div className="timer__test__checkbox__setting__right">
+                            <img src={photo21}/>
+                        </div>
+                    </div>
+                    <div className={mixTest ? 'mix__test__checkbox__setting' : 'mix__test__checkbox__setting__close'}>
+                        <input className="mix__test__checkbox__setting__input" placeholder="0"/>
+                        <p className="mix__test__checkbox__setting__text">из {answerCounter.length}</p>
+                    </div>
+                    <div className="number__attempts">
+                        <div className="number__attempts__left">
+                            <p className="number__attempts__left__text">Количество попыток</p>
+                        </div>
+                        <div className="number__attempts__right">
+                            <div className="number__attempts__right__list">
+                                <p className="number__attempts__right__list__left">Неограничено</p>
+                                <img src={photo21}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="number__attempts">
+                        <div className="number__attempts__left">
+                            <p className="number__attempts__left__text">Система оценивания</p>
+                        </div>
+                        <div className="number__attempts__right">
+                            <div className="number__attempts__right__list">
+                                <p className="number__attempts__right__list__left">Многоуровневая</p>
+                                <img src={photo21}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="marks">
+                        <div className="marks__one">
+                            <div className="marks__one__left">
+                                <div className="marks__one__left__text">Отлично</div>
+                            </div>
+                            <div className="marks__one__right">
+                                <p className="marks__one__right__text">от</p>
+                                <input className="marks__one__right__from__input" placeholder="90"/>
+                                <p className="marks__one__right__text__to">до</p>
+                                <input className="marks__one__right__from__input" placeholder="100"/>
+                                <p className="marks__one__right__text__last">баллов</p>
+                            </div>
+                        </div>
+                        <div className="marks__one">
+                            <div className="marks__one__left">
+                                <div className="marks__one__left__text">Хорошо</div>
+                            </div>
+                            <div className="marks__one__right">
+                                <p className="marks__one__right__text">от</p>
+                                <input className="marks__one__right__from__input" placeholder="70"/>
+                                <p className="marks__one__right__text__to">до</p>
+                                <input className="marks__one__right__from__input" placeholder="89"/>
+                                <p className="marks__one__right__text__last">баллов</p>
+                            </div>
+                        </div>
+                        <div className="marks__one">
+                            <div className="marks__one__left">
+                                <div className="marks__one__left__text">Удовлетвортительно</div>
+                            </div>
+                            <div className="marks__one__right">
+                                <p className="marks__one__right__text">от</p>
+                                <input className="marks__one__right__from__input" placeholder="50"/>
+                                <p className="marks__one__right__text__to">до</p>
+                                <input className="marks__one__right__from__input" placeholder="69"/>
+                                <p className="marks__one__right__text__last">баллов</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div className="createFather">
                 <div className="Create">
                     <p className="create__title">Создание теста</p>
                     {answerCounter.map((i, g) => {
                         return (
-                        <div key={i.id} className="create__question__block">
+                        <div id={i.id} key={i.id} className="create__question__block">
                         <div className="create__question__block__top">
                             <p>Вопрос {g+1}</p>
-                            <img src={closeImg}/>
+                            <img onClick={() => DelQuestion(i.id)} src={closeImg} className="close__create__block"/>
                         </div>
                             <div className="create__question__block__inputs">
-                                <input className="create__question__block__inputs__input" placeholder="Введите Вопрос"/>
+                                <input onChange={(g) => {questionText(i.id, g.target.value)}} className="create__question__block__inputs__input" placeholder={i.title}/>
                                 <select className="create__question__block__inputs__select">
                                     <option>A</option>
                                     <option>B</option>
@@ -154,15 +384,17 @@ function Create() {
                                 </select>
                             </div>
                             <div className="create__question__block__answers">
-                                {i.answers.map((i, e) => {
+                                {i.answers.map((e, g) => {
                                     return (
-                                        <div className="create__question__block__answers__answer">
+                                        <div id={e.id} key={e.id} className={e.id === i.true__answer ? 'create__question__block__answers__answer__correct' : 'create__question__block__answers__answer'}>
                                             <div className="create__question__block__answers__answer__left">
-                                                <img src={answer}/>
-                                                <p>{e+1} ответ</p>
+                                                {/* <img src={answer}/> */}
+                                                <div onClick={() => trueButton(e.id, i.id)}>
+                                                </div>
+                                                <input onChange={(g) => {text(e.id, i.id, g.target.value)}} placeholder={e.name}/>
                                             </div>
                                             <div className="create__question__block__answers__answer__right">
-                                                <img src={closeImg}/>
+                                                <img onClick={() => DelAnswer(e.id, i.id)} src={closeImg}/>
                                             </div>
                                         </div>
                                     )
@@ -173,7 +405,8 @@ function Create() {
                                     Добавить
                                 </button>
                                 <div className="create__question__block__bottom__right">
-                                    <img className="create__question__block__bottom__right__img" src={photo17}/>
+                                    <img onClick={() => {console
+                                    .log(answerCounter)}} className="create__question__block__bottom__right__img" src={photo17}/>
                                     <img src={photo18}/>
                                 </div>
                             </div>
@@ -186,39 +419,12 @@ function Create() {
                 </div>
                 <div className="bottom__buttons">
                     <button className="backk__button" onClick={() => setPage(0)}>Назад</button>
-                    <button className="next__button" onClick={() => setPage(2)}>Далее</button>
+                    <button className="next__button" onClick={() => setSettingsActive(true)}>Далее</button>
                 </div>
             </div>
-        )
-    } else if (page === 2) {
-        return (
-            <div>
-                <div className="Create">
-                    <div className="more__block">
-                        <div className="more__block__left">
-                            <p className="more__block__pass">Пропустить задание</p>
-                        </div>
-                        <div className="more__block__right">
-                            <input type='radio'/>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </>
         )
     }
 }
 
 export default Create;
-
-
-
-{/* <div className="back__button">
-    <button onClick={() => {setPage(0)}}>
-        Назад
-    </button>
-</div>
-<div className="further__button">
-    <button onClick={() => {setPage(2)}}>
-        Далее
-    </button>
-</div> */}
