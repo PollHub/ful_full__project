@@ -12,32 +12,6 @@ import photo21 from '.././img/21.png';
 
 function Create() {
 
-    // function trueButton(id) {
-    //     let trueButton = document.querySelectorAll('.trueButton');
-    //     let falseButton = document.querySelectorAll('.falseButtonChecked');
-    //     let falseChecked = null;
-
-    //     falseButton.forEach(e => {
-    //         if (e.id === id) {
-    //             falseChecked = e;
-    //         }
-    //     })
-
-    //     // console.log(falseChecked)
-
-    //     trueButton.forEach(e => {
-    //         if (falseChecked.classList[0] === 'falseButtonChecked') {
-    //             if (e.id === id) {
-    //                 e.classList = 'trueButtonChecked';
-    //                 falseChecked.classList = 'falseButton'
-    //             }
-    //         } else if (e.id === id) {
-    //             e.classList = 'trueButtonChecked'
-    //         }
-    //     })
-    //     console.log(id)
-    // }
-
     function trueButton(id, blockId) {
         let questionBlocks = document.querySelectorAll('.create__question__block');
         let copy = answerCounter
@@ -144,7 +118,7 @@ function Create() {
 
     // let history = useHistory()
 
-    let [page, setPage] = useState(1);
+    let [page, setPage] = useState(0);
 
     function text(id, blockId, text) {
         let copy = answerCounter
@@ -173,7 +147,7 @@ function Create() {
 
     // Settimgs function and data
 
-    const [settingsActive, setSettingsActive] = useState(true);
+    const [settingsActive, setSettingsActive] = useState(false);
 
     const [passTask, setPassTask] = useState(false);
 

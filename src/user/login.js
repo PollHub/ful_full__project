@@ -56,7 +56,7 @@ const Login = () => {
         redirect: 'follow'
     };
 
-    fetch("https://dfssd.herokuapp.com/auth/jwt/create/", requestOptions)
+    fetch("https://dfssd-first.herokuapp.com/auth/jwt/create/", requestOptions)
         .then(response => response.text())
         .then(result => localStorage.setItem('acces', result))
         .catch(error => alert('Что-то не верно'));
@@ -75,7 +75,7 @@ const Login = () => {
     };
     console.log(login, password)
 
-    fetch("https://dfssd.herokuapp.com/auth/users/", requestOptions)
+    fetch("https://dfssd-first.herokuapp.com/auth/users/", requestOptions)
         // .then(response => console.log(response))
         .then(response => {
             if (response.status === 201) {
