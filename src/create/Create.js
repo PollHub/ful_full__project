@@ -144,7 +144,7 @@ function Create() {
 
     // let history = useHistory()
 
-    let [page, setPage] = useState(0);
+    let [page, setPage] = useState(1);
 
     function text(id, blockId, text) {
         let copy = answerCounter
@@ -173,7 +173,7 @@ function Create() {
 
     // Settimgs function and data
 
-    const [settingsActive, setSettingsActive] = useState(false);
+    const [settingsActive, setSettingsActive] = useState(true);
 
     const [passTask, setPassTask] = useState(false);
 
@@ -251,27 +251,30 @@ function Create() {
     } else if (page === 1) {
         return(
             <>
+            {settingsActive && <div className="test__settings__block__father">
             <div className={settingsActive ? 'test__settings__block' : 'close__test__settings__block'}>
                     <div className="test__settings__block__top">
                         <p className="test__settings__block__top__title">Настройки теста</p>
                         <img src={photo20} onClick={() => {setSettingsActive(false)}} className="test__settings__block__top__close"/>
                     </div>
                     <div className="pass__question__checkbox">
-                        <div>
+                        <div className="pass__question__checkbox__left">
                             <p className="pass__question__checkbox__text">
                                 Пропустить задание
                             </p>
                         </div>
                         <div className="pass__question__checkbox__right">
                             <input onClick={() => {setPassTask(!passTask)}} className="pass__question__checkbox__input" type="checkbox"/>
-                            <p className="under__checkbox__text">{passTask ? 'Вкл' : 'Выкл'}</p>
+                            <p className="under__checkbox__text under__checkbox__text__margin">{passTask ? 'Вкл' : 'Выкл'}</p>
                         </div>
                     </div>
                     <div className="editing__test__checkbox">
-                        <p className="editing__test__checkbox__text">Редактирование</p>
-                        <div>
+                        <div className="editing__test__checkbox__left">
+                            <p className="editing__test__checkbox__text">Редактирование</p>
+                        </div>
+                        <div className="editing__test__checkbox__right">
                             <input className="editing__test__checkbox__input" type="checkbox"/>
-                            <p className="under__checkbox__text">Выкл</p>
+                            <p className="under__checkbox__text under__checkbox__text__margin">Выкл</p>
                         </div>
                     </div>
                     <div className="timer__test__checkbox">
@@ -365,7 +368,7 @@ function Create() {
                         </div>
                     </div>
             </div>
-            <div className="createFather">
+            </div>}
                 <div className="Create">
                     <p className="create__title">Создание теста</p>
                     {answerCounter.map((i, g) => {
@@ -421,7 +424,6 @@ function Create() {
                     <button className="backk__button" onClick={() => setPage(0)}>Назад</button>
                     <button className="next__button" onClick={() => setSettingsActive(true)}>Далее</button>
                 </div>
-            </div>
             </>
         )
     }
