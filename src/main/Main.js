@@ -1,6 +1,10 @@
 import React from "react";
+import GetUserData from "../api/userdata/GetUserData";
 
 function Main() {
+
+    GetUserData()
+
     return (
         <>
             <div className="back_logos"></div>
