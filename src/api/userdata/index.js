@@ -1,5 +1,8 @@
-export const getProfile = async (token) => {
-    var myHeaders = new Headers();
+export const getProfile = async () => {
+    const getAccess = localStorage.getItem('acces');
+    const token = (JSON.parse(getAccess).access)
+
+    const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
 
     const requestOptions = {
@@ -8,7 +11,7 @@ export const getProfile = async (token) => {
         redirect: 'follow'
     };
     
-    const response = await fetch("https://dfssd-first.herokuapp.com/api/accounts/profile/5/", requestOptions)
+    const response = await fetch("https://dfssd-first.herokuapp.com/api/accounts/profile/", requestOptions)
 
     return response
 };

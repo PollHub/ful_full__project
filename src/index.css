@@ -1159,13 +1159,11 @@ a {
 
 .circle_1 {
   width: 165px;
-  height: 165px;
-  border: 3px solid #7D63AD;
-  box-sizing: border-box;
-  border-radius: 139px;
-  position: absolute;
-  top: 301px;
-  left: 186px;
+    height: 165px;
+    border: 3px solid #7D63AD;
+    box-sizing: border-box;
+    border-radius: 139px;
+    position: absolute;
 }
 
 .circle_2 {
@@ -1642,3 +1640,22 @@ a {
   line-height: 36px;
   color: #000000;
 }
+
+.passage__test__howmany__questions {
+  font-family: 'TT Firs Neue';
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 31px;
+/* identical to box height */
+color: #000000;
+margin-top: 24px; 
+}
+
+.bottom__buttons__passage {
+  display: flex;
+  justify-content: right;
+  position: absolute;
+  bottom: 0;
+  right: 120px;
+} 

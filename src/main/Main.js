@@ -1,9 +1,16 @@
-import React from "react";
-import GetUserData from "../api/userdata/GetUserData";
+import React, { useEffect, useState } from "react";
+import { getProfile } from "../api/userdata/index.js";
 
 function Main() {
 
-    GetUserData()
+    const [userInfo, setUserInfo] = useState(undefined);
+
+    useEffect(() => {
+        if (!userInfo) {
+            const data = getProfile()
+            data.then(data => setUserInfo(data))
+        }
+    }, [])
 
     return (
         <>

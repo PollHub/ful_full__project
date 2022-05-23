@@ -9,11 +9,10 @@ import photo4 from '../img/header/4.png';
 import photo2 from '../img/header/2.png';
 import photo3 from '../img/header/3.png';
 import photo22 from '../img/22.png'
-import GetUserData from "../api/userdata/GetUserData";
 
 function Header() {
 
-    GetUserData()
+    // GetUserData()
 
     // console.log(JSON.parse(localStorage.getItem('userData')))
 
