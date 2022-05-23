@@ -4,6 +4,8 @@ import Main from "./main/Main";
 import Profile from "./profile/Profile";
 import Create from "./create/Create";
 import Login from "./user/login";
+import Register from "./user/Register";
+import Passage from "./passage/Passage";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
             <Route exact path={'/profile'} component={Profile}/>
             <Route exact path={'/create'} component={Create}/>
             <Route exact path={'/login'} component={Login}/>
+            <Route exact path={'/register'} component={Register}/>
+            <Route exact path={'/passage'} component={Passage}/>
           </Switch>
         </div>
       </div>

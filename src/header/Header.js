@@ -8,8 +8,15 @@ import photo8 from '../img/header/8.png';
 import photo4 from '../img/header/4.png';
 import photo2 from '../img/header/2.png';
 import photo3 from '../img/header/3.png';
+import photo22 from '../img/22.png'
+import GetUserData from "../api/userdata/GetUserData";
 
 function Header() {
+
+    GetUserData()
+
+    // console.log(JSON.parse(localStorage.getItem('userData')))
+
     return (
         <>
         <div className="header__back__logos">
@@ -45,8 +52,25 @@ function Header() {
                     </div>
                     <div className="header__right">
                         <Link to={'/profile'}>
-                            <img className="header__profile__photo" src={user}/>
+                            {/* <img className="header__profile__photo" src={user}/> */}
+                            {/* <img className="header__profile__photo" src={JSON.parse(localStorage.getItem('userData')).user_image}/> */}
                         </Link>
+                        {
+                            localStorage.getItem('user__image')
+                            ?
+                            <Link to={'/profile'}>
+                                <img className="header__profile__photo" src={localStorage.getItem('user__image')}/>
+                            </Link>
+                            :
+                            <>
+                                <Link to={'/login'}>
+                                    <div className="link__autorize">
+                                        Авторизоваться
+                                    </div>
+                                </Link>
+                                <img src={photo22}/>
+                            </>
+                        }
                     </div>
                 </div>
         </div>
