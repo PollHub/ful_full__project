@@ -6,6 +6,7 @@ import Create from "./create/Create";
 import Login from "./user/login";
 import Register from "./user/Register";
 import Passage from "./passage/Passage";
+import PassageQuestion from "./passage/PassageQuestion";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route exact path={'/login'} component={Login}/>
             <Route exact path={'/register'} component={Register}/>
             <Route exact path={'/passage/:id'} component={Passage}/>
+            <Route exact path={'/passage/:id/question/:qid'} component={PassageQuestion}/>
           </Switch>
         </div>
       </div>

@@ -20,11 +20,10 @@ export const GetTest = async (link) => {
 
 
     var myHeaders = new Headers();
-    // myHeaders.append("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzMzU2MDA5LCJqdGkiOiIyN2EzOTIxNzdlZGY0MDY3ODVlOTk1YzY5N2IyZDVkMiIsInVzZXJfaWQiOjN9.rkxKjD1-fzMvc8GcK6jThJnZOJ4EHiMn7Pb31yRtCSU");
     myHeaders.append("Authorization", `Bearer ${token}`);
 
     var formdata = new FormData();
-    formdata.append("open", "true");
+    // formdata.append("open", "true");
 
     var requestOptions = {
     method: 'GET',
@@ -35,8 +34,7 @@ export const GetTest = async (link) => {
 
     fetch(`https://dfssd-first.herokuapp.com/api/test/${link}/`, requestOptions)
         .then(response => response.text())
-        // .then(result => console.log(result))
-        .then(result => localStorage.setItem('test_data', result))
+        .then(result => console.log(result))
+        // .then(result => localStorage.setItem('test_data', result))
         .catch(error => console.log('error', error));
-
 }

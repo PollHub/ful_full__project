@@ -8,11 +8,11 @@ function Main() {
     useEffect(() => {
         if (!userInfo) {
             const data = getProfile()
-            data.then(data => setUserInfo(data))
+            console.log(data)
         }
     }, [])
 
-    console.log(userInfo)
+    // console.log(userInfo)
 
     return (
         <>
