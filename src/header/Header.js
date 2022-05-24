@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import userLogo from '../img/PollHub.svg';
 import user from '../img/userImg.svg'
@@ -9,12 +9,18 @@ import photo4 from '../img/header/4.png';
 import photo2 from '../img/header/2.png';
 import photo3 from '../img/header/3.png';
 import photo22 from '../img/22.png'
+import { getProfile } from "../api/userdata";
 
 function Header() {
 
-    // GetUserData()
+    // const [userInfo, setUserInfo] = useState(undefined);
 
-    // console.log(JSON.parse(localStorage.getItem('userData')))
+    // useEffect(() => {
+    //     if (!userInfo) {
+    //         const data = getProfile()
+    //         data.then(data => setUserInfo(data))
+    //     }
+    // }, [])
 
     return (
         <>

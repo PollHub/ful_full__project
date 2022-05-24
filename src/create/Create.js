@@ -107,12 +107,64 @@ function Create() {
         ]     
     );
 
+    // const [forBack, setForBack] = useState([])
+
+    
+
+    function test() {
+
+        const getAccess = localStorage.getItem('acces');
+        const token = (JSON.parse(getAccess).access)
+        
+        const test_id = localStorage.getItem('test_id')
+        // console.log(test_id)
+
+        let forBack = []
+
+        let empty = {id_test: JSON.parse(test_id), question: '', id_true_answer: null, answers: []};
+
+        answerCounter.map((i) => {
+            // console.log(i)
+            empty.question = i.title
+            // empty.id = i.id
+            i.answers.map((e, g) => {
+                if (e.id === i.true__answer) {
+                    empty.id_true_answer = g
+                }
+            })
+            i.answers.map((a) => {
+                empty.answers.push(a.name)
+            })
+            forBack.push(empty)
+            empty = {id_test: JSON.parse(test_id), question: '', id_true_answer: null, answers: []};
+        })
+
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token}`);
+        myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify(forBack);
+
+    console.log(raw)
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+    };
+
+    fetch("https://dfssd-first.herokuapp.com/api/tests/post_all_questions/", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+    }
+
     let [subject, setSubject] = useState('Выберите предмет');
 
     let [list, setList] = useState(false);
 
-
-    let [subjects, setSubjects] = useState(['Математика', "Англ.Яз", "История", "Питон"])
+    let [subjects, setSubjects] = useState(['Математика', "Англ.Яз", "История", "Питон"]);
 
     let [title, setTitle] = useState('');
 
@@ -145,6 +197,39 @@ function Create() {
         })
     }
 
+    function firstSetPage() {
+
+        const getAccess = localStorage.getItem('acces');
+        const token = (JSON.parse(getAccess).access)
+
+        if (localStorage.getItem('test_id') === 'none') {
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            var formdata = new FormData();
+            formdata.append("name", title);
+            formdata.append("subject", subject);
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: formdata,
+                redirect: 'follow'
+            };
+
+            fetch("https://dfssd-first.herokuapp.com/api/tests/", requestOptions)
+                .then(response => response.text())
+                // .then(result => console.log(result))
+                .then(result => localStorage.setItem('test_id', JSON.parse(result).id))
+                .catch(error => console.log('error', error));
+            
+            setPage(1)
+            } else if(localStorage.getItem('test_id') != 'none') {
+                setPage(1)
+                // alert('Вы уже начали создавать тест')
+            }
+    }
+
     // Settimgs function and data
 
     const [settingsActive, setSettingsActive] = useState(false);
@@ -156,6 +241,18 @@ function Create() {
     const [timerTest, setTimerTest] = useState(false);
 
     const [mixTest, setMixTest] = useState(false);
+
+    function openSettings() {
+        // answerCounter.map(e => {
+        //     // console.log(e)
+        //     e.answers.map(g => {
+        //         if (e.true__answer === g.id) {
+        //             console.log('правильный ответ' + g.name)
+        //         }
+        //     })
+        // })
+        test()
+    }
 
     if (page === 0) {
         return (
@@ -207,19 +304,20 @@ function Create() {
                     <p className="test__name">Название теста</p>
                     <input onChange={(e) => setTitle(e.target.value)} className="name__test__input" placeholder="Ретушь фотографий 1.1"/>
                 </div>
-                <div className="first__bottom__buttons">
+                {/* <div className="first__bottom__buttons">
                         {
                             title === '' && subject != 'Выберите предмет'
                             ?
-                            <button disabled className="next__button" onClick={() => {setPage(1)}}>
+                            <button disabled className="next__button can" onClick={() => {firstSetPage()}}>
                                 Далее
                             </button>
                             :
-                            <button className="next__button" onClick={() => {setPage(1)}}>
+                            <button className="next__button" onClick={() => {firstSetPage()}}>
                                 Далее
                             </button>
                         }
-                </div>
+                </div> */}
+                <button className="next__button" onClick={() => {firstSetPage()}}>Далее</button>
             </div>
         )
     } else if (page === 1) {
@@ -396,7 +494,7 @@ function Create() {
                 </div>
                 <div className="bottom__buttons">
                     <button className="backk__button" onClick={() => setPage(0)}>Назад</button>
-                    <button className="next__button" onClick={() => setSettingsActive(true)}>Далее</button>
+                    <button className="next__button" onClick={() => openSettings()}>Далее</button>
                 </div>
             </>
         )
