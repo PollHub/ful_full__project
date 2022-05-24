@@ -1812,10 +1812,14 @@ margin-top: 24px;
   width: 400px;
   border: 2px solid #7D63AD;
   border-radius: 30px;
-  padding: 15px 0;
+  padding: 15px 0 15px 24px;
   margin-bottom: 20px;
-  text-align: center;
+  /* text-align: center; */
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
 }
+
 
 .passage__test__answer__block__father {
   display: flex;
@@ -1823,4 +1827,39 @@ margin-top: 24px;
   flex-wrap: wrap;
   width: 860px;
   margin-top: 20px;
+}
+
+.passage__test__answer__block__clicker {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #7D63AD;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.passage__test__answer__block__clicker__active {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #7D63AD;
+  background-color: #7D63AD;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.passage__test__answer__block__text {
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  /* identical to box height */
+  /* PH Black */
+  color: #000000;
+  margin-left: 16px;
+}
+
+.bottom__buttons__passage__question {
+  position: absolute;
+  bottom: 0;
+  right: 120px;
 }
