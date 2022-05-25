@@ -1347,6 +1347,12 @@ a {
   top: 168px;
 }
 
+.right_up_quads__main {
+  position: absolute;
+  left: 1086px;
+  top: 128px;
+}
+
 .right_bottom_quad {
   position: absolute;
   left: 1195px;
@@ -1367,7 +1373,6 @@ a {
   position: absolute;
   margin-left: -159px;
   margin-top: 53px;
-
 }
 
 .right_bottom_quad2 {
@@ -1393,7 +1398,6 @@ a {
   position: absolute;
   margin-left: 5px;
   margin-top: -13px;
-
 }
 
 
@@ -1697,7 +1701,7 @@ margin-top: 24px;
   /* PH Purple */
   border: 2px solid #7D63AD;
   /* Blur Glass */
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(15px);
   /* Note: backdrop-filter has minimal browser support */
   border-radius: 30px;
 }
@@ -1862,4 +1866,106 @@ margin-top: 24px;
   position: absolute;
   bottom: 0;
   right: 120px;
+}
+
+.right_bottom_quad__main {
+  position: absolute;
+  left: 205px;
+  top: 452px;
+  transform: rotate(-20deg);
+}
+
+.right_bottom_quad__main__second {
+  position: absolute;
+  left: 520px;
+  top: 510px;
+  transform: rotate(-20deg);
+}
+
+.right_bottom_quad__main__third {
+    position: absolute;
+    left: 1120px;
+    top: 780px;
+}
+
+.left_bottom_quad__main {
+  position: absolute;
+  top: 832px;
+  left: 239px;
+}
+
+.left_bottom_quad__main__second {
+  position: absolute;
+  left: 1200px;
+  top: 500px;
+  transform: rotate(-7deg);
+}
+
+.lbq__main__second {
+  width: 121.33px;
+  height: 125.35px;
+  border: 3px solid #7D63AD;
+  box-sizing: border-box;
+  border-radius: 10px;
+  position: absolute;
+}
+
+
+.lbq__main {
+  width: 121.33px;
+  height: 125.35px;
+  border: 3px solid #7D63AD;
+  box-sizing: border-box;
+  border-radius: 10px;
+  position: absolute;
+}
+
+.left_bottom_quad3__main {
+  margin-left: 17px;
+  margin-top: -35px;
+}
+
+.left_bottom_quad2__main__second {
+  width: 91.97px;
+  height: 95.02px;
+  border: 2px solid #7D63AD;
+  border-radius: 10px;
+}
+
+.left_bottom_quad3__main__second {
+  width: 91.97px;
+  height: 95.02px;
+  border: 2px solid #7D63AD;
+  border-radius: 10px;
+  margin-left: 31px;
+  margin-top: -41px;
+}
+
+.right_up_quads__main__second {
+  position: absolute;
+  /* left: 940px; */
+  left: 988px;
+  top: 540px;
+  transform: rotate(40deg);
+}
+
+.right_up_quad1_main {
+  width: 51.44px;
+  height: 128.58px;
+  background: #FFFFFF;
+  border: 2px solid #7D63AD;
+  box-sizing: border-box;
+  border-radius: 10px;
+  transform: rotate(40.2deg);
+  position: absolute;
+}
+
+.right_up_quad2_main {
+  width: 51.44px;
+  height: 128.58px;
+  border: 2px solid #7D63AD;
+  box-sizing: border-box;
+  border-radius: 10px;
+  transform: rotate(-49.8deg);
+  position: absolute;
 }

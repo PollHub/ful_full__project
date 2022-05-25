@@ -15,7 +15,7 @@ export const getProfile = async () => {
     
     const response = await fetch("https://dfssd-first.herokuapp.com/api/accounts/profile/", requestOptions)
 
-    return 'backdata'
+    return response
 };
 
 

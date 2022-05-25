@@ -34,7 +34,7 @@ export const GetTest = async (link) => {
 
     fetch(`https://dfssd-first.herokuapp.com/api/test/${link}/`, requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
-        // .then(result => localStorage.setItem('test_data', result))
+        // .then(result => console.log(result))
+        .then(result => localStorage.setItem('test_data', result))
         .catch(error => console.log('error', error));
 }

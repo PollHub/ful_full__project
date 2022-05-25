@@ -7,12 +7,15 @@ function Main() {
 
     useEffect(() => {
         if (!userInfo) {
-            const data = getProfile()
-            console.log(data)
+            getUserData()
         }
     }, [])
 
-    // console.log(userInfo)
+    const getUserData = async () => {
+        const data = await getProfile()
+        const body = await data.json()
+        console.log(body);
+    }
 
     return (
         <>
@@ -29,6 +32,37 @@ function Main() {
                     <div className="restangle_6 elemrest"></div>
                     <div className="restangle_7 elemrest"></div>
                     <div className="restangle_8 elemrest"></div>
+              </div>
+              <div className="right_up_quads__main">
+                <div className="right_up_quad1"></div>
+                <div className="right_up_quad2"></div>
+              </div>
+              <div className="right_bottom_quad__main">
+                <div className="right_bottom_quad1 rbq"></div>
+                <div className="right_bottom_quad2 rbq">&#9650;</div>
+                <div className="right_bottom_quad3 rbq"></div>
+              </div>
+              <div className="right_bottom_quad__main__second">
+                <div className="right_bottom_quad1 rbq"></div>
+                <div className="right_bottom_quad2 rbq">&#9650;</div>
+                <div className="right_bottom_quad3 rbq"></div>
+              </div>
+              <div className="left_bottom_quad__main">
+                <div className="left_bottom_quad2 lbq__main"></div>
+                <div className="left_bottom_quad3__main lbq__main"></div>
+              </div>
+              <div className="right_up_quads__main__second">
+                <div className="right_up_quad1_main"></div>
+                <div className="right_up_quad2_main"></div>
+              </div>
+              <div className="left_bottom_quad__main__second">
+                <div className="left_bottom_quad2__main__second lbq__main__second"></div>
+                <div className="left_bottom_quad3__main__second lbq__main__second"></div>
+              </div>
+              <div className="right_bottom_quad__main__third">
+                  <div className="right_bottom_quad1 rbq"></div>
+                  <div className="right_bottom_quad2 rbq">&#9650;</div>
+                  <div className="right_bottom_quad3 rbq"></div>
               </div>
             </div>
             <div className="main">

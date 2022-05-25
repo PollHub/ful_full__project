@@ -13,19 +13,18 @@ function Passage() {
     // console.log(testInfo.name)
 
     const data = useParams();
-    // console.log(data.id)
-
-    // useEffect(() => {
-    //     if (!testInfo) {
-    //         const data = GetTest(JSON.stringify(data))
-    //     }
-    // }, [])
 
     useEffect(() => {
+        let get = GetTest(data.id)
+        // let question = StartTest(data.id)
+    }, [])
+
+    function start() {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${token}`);
 
         var formdata = new FormData();
+        // formdata.append("answer", "0");
 
         var requestOptions = {
             method: 'GET',
@@ -34,12 +33,13 @@ function Passage() {
             redirect: 'follow'
         };
 
-        fetch(`https://dfssd-first.herokuapp.com/api/test/${data.id}/`, requestOptions)
+        fetch("https://dfssd-first.herokuapp.com/api/test/7LCUJIED2SOWE5WG/start/", requestOptions)
             .then(response => response.text())
-            // .then(result => console.log(result))
-            .then(result => localStorage.setItem('test_data', result))
+            .then(result => console.log(result))
             .catch(error => console.log('error', error));
-    }, [])
+
+        let question = StartTest(data.id)
+    }
 
     const [testInfo, setTestInfo] = useState(JSON.parse(localStorage.getItem('test_data')));
 
@@ -48,8 +48,9 @@ function Passage() {
         <div className="passage">
             <h1 className="passage__test__title">{testInfo.name}</h1>
             <p className="passage__test__howmany__questions">{testInfo.count_question} вопросов</p>
+            <p className="passage__test__howmany__questions">{testInfo.time_work} минут</p>
             <div className="bottom__buttons__passage">
-                <Link to={`/passage/${data.id}/question/1`}>
+                <Link onClick={() => {start()}}  to={`/passage/${data.id}/question/2`}>
                     <button className="bottom__buttons__passage__next">
                         Начать 
                     </button>
