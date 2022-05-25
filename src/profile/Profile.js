@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import user from '../img/userImg.svg';
 import { Link } from "react-router-dom";
+import Header from "../header/Header";
+import { getProfile } from "../api/userdata";
 
 function Profile() {
 
@@ -19,12 +21,56 @@ function Profile() {
         setActive(!active)
     }
 
+    let [userData, setUserData] = useState(JSON.parse(localStorage.getItem('user_data')))
+    // console.log(userData);
+
+    const [status, setStatus] = useState(null);
+
+    const [userImg, setUserImg] = useState(null);
+
+    const getUserData = async () => {
+        const data = await getProfile()
+        const body = await data.json()
+        // console.log(data)
+        setStatus(data.status);
+        // console.log(body);
+        setUserImg(body.user_image)
+    }
+
+    useEffect(() => {
+
+        const getAccess = localStorage.getItem('acces');
+        const token = (JSON.parse(getAccess).access)
+
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token}`);
+
+        var requestOptions = {
+            method: 'PATCH',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch("https://dfssd-first.herokuapp.com/api/accounts/set-username/", requestOptions)
+            .then(response => response.text())
+            // .then(result => console.log(result))
+            .then(result => localStorage.setItem('user_data', result))
+            .catch(error => console.log('error', error));
+
+        // console.log(status)
+    
+        getUserData()
+
+    }, [])
+
     return (
-        <div className="profile">
+        <>
+            <Header/>
+            <div className="profile">
             <div className="profile__user">
                 <img src={user} className="profile__user__img"/>
                 <div className="profile__user__data">
-                    <p className="profile__user__name">Дмитрий Шишков (Пользователь)</p>
+                    <p className="profile__user__name">{userData.first_name} {userData.last_name}</p>
                     <p className="profile__user__mail">SHishkov_dev2.19@st.ithub.ru</p>
                     <p className="profile__user__change" onClick={() => {show()}}>Изменить</p>
                 </div>
@@ -59,6 +105,7 @@ function Profile() {
             </div>
             <div className={active ? 'change__block' : 'close__change__block'}></div>
         </div>
+        </>
     )
 }
 

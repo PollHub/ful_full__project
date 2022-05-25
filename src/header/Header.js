@@ -11,16 +11,30 @@ import photo3 from '../img/header/3.png';
 import photo22 from '../img/22.png'
 import { getProfile } from "../api/userdata";
 
+
 function Header() {
 
-    // const [userInfo, setUserInfo] = useState(undefined);
+    const [userInfo, setUserInfo] = useState(undefined);
 
-    // useEffect(() => {
-    //     if (!userInfo) {
-    //         const data = getProfile()
-    //         data.then(data => setUserInfo(data))
-    //     }
-    // }, [])
+    const [status, setStatus] = useState(null);
+
+    const [userImg, setUserImg] = useState(null);
+    // console.log(status)
+
+    useEffect(() => {
+        if (!userInfo) {
+            getUserData()
+        }
+    }, [])
+
+    const getUserData = async () => {
+        const data = await getProfile()
+        const body = await data.json()
+        // console.log(data)
+        setStatus(data.status);
+        console.log(body);
+        setUserImg(body.user_image)
+    }
 
     return (
         <>
@@ -50,9 +64,15 @@ function Header() {
                         <Link to={'/'}>
                             <p className="header__main">Главная</p>
                         </Link>
-                        <Link to={'/create'}>
-                            <p className="header__test">Тесты</p>
-                        </Link>
+                        {
+                            status === 200 
+                            ?
+                            <Link to={'/create'}>
+                                <p className="header__test">Тесты</p>
+                            </Link> 
+                            :
+                            <></>
+                        }
                         {/* <p style={{'fontFamily': 'revert', 'fontSize': 36}}>Главная</p> */}
                     </div>
                     <div className="header__right">
@@ -68,12 +88,28 @@ function Header() {
                             </Link>
                             :
                             <>
-                                <Link to={'/login'}>
-                                    <div className="link__autorize">
-                                        Авторизоваться
-                                    </div>
-                                </Link>
-                                <img src={photo22}/>
+                                {
+                                    status === 200 
+                                    ?
+                                    <>
+                                        <Link to={'/create'}>
+                                            <div className="link__autorize">
+                                                Создать Тест
+                                            </div>
+                                        </Link>
+                                    {/* <img src={userImg}/> */}
+                                    <Link to={'/profile'}><img src={photo22}/></Link>
+                                    </>
+                                    :
+                                    <>
+                                        <Link to={'/login'}>
+                                            <div className="link__autorize">
+                                                Авторизоваться
+                                            </div>
+                                        </Link>
+                                        <img src={photo22}/>
+                                    </>
+                                }
                             </>
                         }
                     </div>

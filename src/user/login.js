@@ -125,8 +125,8 @@ const Login = () => {
                 <div className="logform needs-validation">
                   <div className="text_poll">PollHub</div>
                   <div className="dop_text">
-                    <Link className="textrega" to={'/register'}>Регистрация</Link>
-                    <Link className="textreg" to={'/login'} >Вход</Link>
+                    <Link className="textrega" to={'/login'}>Регистрация</Link>
+                    <Link className="textreg" to={'/register'}>Вход</Link>
                   </div>
                   <div className="inputtype">
                     <input defaultValue={login} type="login" placeholder="E-mail" className="inputPassword" id="exampleInputEmail1" onChange={(e) => { setLogin(e.target.value) }} />

@@ -7,12 +7,13 @@ import Login from "./user/login";
 import Register from "./user/Register";
 import Passage from "./passage/Passage";
 import PassageQuestion from "./passage/PassageQuestion";
+import Finish from "./passage/Finish";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Header/>
+        {/* <Header/> */}
         <div className="content">
           <Switch>
             <Route exact path={'/'} component={Main}/>
@@ -22,6 +23,7 @@ function App() {
             <Route exact path={'/register'} component={Register}/>
             <Route exact path={'/passage/:id'} component={Passage}/>
             <Route exact path={'/passage/:id/question/:qid'} component={PassageQuestion}/>
+            <Route exact path={'/passage/:id/finish'} component={Finish}/>
           </Switch>
         </div>
       </div>

@@ -13,7 +13,8 @@ export const getProfile = async () => {
         redirect: 'follow'
     };
     
-    const response = await fetch("https://dfssd-first.herokuapp.com/api/accounts/profile/", requestOptions)
+    // const response = await fetch("https://dfssd-first.herokuapp.com/api/accounts/profile/", requestOptions)
+    const response = await fetch("https://dfssd-first.herokuapp.com/api/main/", requestOptions)
 
     return response
 };

@@ -453,9 +453,8 @@ function Create() {
                             <div className="create__question__block__inputs">
                                 <input onChange={(g) => {questionText(i.id, g.target.value)}} className="create__question__block__inputs__input" placeholder={i.title}/>
                                 <select className="create__question__block__inputs__select">
-                                    <option>A</option>
-                                    <option>B</option>
-                                    <option>C</option>
+                                    <option>Один вариант ответа</option>
+                                    <option>Несколько вариантов ответа</option>
                                 </select>
                             </div>
                             <div className="create__question__block__answers">

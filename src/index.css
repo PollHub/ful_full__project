@@ -508,6 +508,9 @@ a {
   color: #FFFFFF;
   cursor: pointer;
   margin-bottom: 20px;
+  position: absolute;
+  bottom: 0;
+  right: 120px;
 }
 
 .active__button__next {
@@ -1161,6 +1164,9 @@ a {
   padding-right: 169px;
 }
 
+.circle {
+}
+
 .circle_1 {
   width: 165px;
     height: 165px;
@@ -1168,6 +1174,8 @@ a {
     box-sizing: border-box;
     border-radius: 139px;
     position: absolute;
+    left: 190px;
+    top: 222px;
 }
 
 .circle_2 {
@@ -1177,7 +1185,8 @@ a {
   width: 77px;
   height: 77px;
   position: absolute;
-  top: 231px;
+  top: 157px;
+  left: 400px;
 }
 
 /* .content__father {
@@ -1188,7 +1197,7 @@ a {
 .loginform {
   display: flex;
   justify-content: center;
-  margin: 120px 0;
+  margin: 70px 0;
 }
 
 .back_registr {
@@ -1343,8 +1352,8 @@ a {
 
 .right_up_quads {
   position: absolute;
-  left: 1086px;
-  top: 168px;
+  left: 1088px;
+  top: 31px;
 }
 
 .right_up_quads__main {
@@ -1356,7 +1365,7 @@ a {
 .right_bottom_quad {
   position: absolute;
   left: 1195px;
-  top: 832px;
+  top: 694px;
 }
 
 .rbq {
@@ -1403,7 +1412,7 @@ a {
 
 .left_bottom_quad {
   position: absolute;
-  top: 832px;
+  top: 696px;
   left: 239px;
 }
 
@@ -1442,7 +1451,7 @@ a {
 
 .restangle {
   position: absolute;
-  top: 370px;
+  top: 266px;
   left: 1151px;
 }
 
@@ -1968,4 +1977,34 @@ margin-top: 24px;
   border-radius: 10px;
   transform: rotate(-49.8deg);
   position: absolute;
+}
+
+.finish__test {
+  padding: 0 120px;
+  /* margin: 120px 0; */
+}
+
+.finish__button__passage {
+  /* width: 404px; */
+  /* height: 82px; */
+  padding: 25px 70px;
+  background: #7D63AD;
+  border-radius: 30px;
+  border: none;
+
+  font-family: 'TT Firs Neue';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 31px;
+/* identical to box height */
+
+
+/* PH White */
+
+color: #FFFFFF;
+position: absolute;
+bottom: 0;
+right: 120px;
+margin-bottom: 30px;
 }

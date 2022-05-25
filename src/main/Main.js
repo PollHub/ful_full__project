@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { getProfile } from "../api/userdata/index.js";
+import Header from "../header/Header.js";
 
 function Main() {
 
     const [userInfo, setUserInfo] = useState(undefined);
+
+    const [status, setStatus] = useState(null);
+
+    const [userImg, setUserImg] = useState(null);
+    // console.log(status)
 
     useEffect(() => {
         if (!userInfo) {
@@ -14,12 +20,21 @@ function Main() {
     const getUserData = async () => {
         const data = await getProfile()
         const body = await data.json()
+        console.log(data)
+        setStatus(data.status);
         console.log(body);
+        setUserImg(body.user_image)
     }
 
     return (
         <>
-            <div className="back_logos">
+            <Header/>
+            {status === 200 
+                ? 
+            <div><p>Ваши тесты</p></div>
+            :
+            <>
+                <div className="back_logos">
                 <div className="left_top_circle">
                     <div className="left_top_circle__circle"></div>
                 </div>
@@ -72,6 +87,8 @@ function Main() {
                     <button className="main__center__button">Авторизоваться</button>
                 </div>
             </div>
+            </>
+            }
         </>
     )
 }

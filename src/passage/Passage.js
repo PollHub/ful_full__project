@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { GetTest } from "../api/getTest/index.js";
 import { StartTest } from "../api/startTest/index.js";
 import { Link } from "react-router-dom";
+import Header from "../header/Header.js";
 
 function Passage() {
     const getAccess = localStorage.getItem('acces');
@@ -45,7 +46,9 @@ function Passage() {
 
 
     return (
-        <div className="passage">
+        <>  
+            <Header/>
+            <div className="passage">
             <h1 className="passage__test__title">{testInfo.name}</h1>
             <p className="passage__test__howmany__questions">{testInfo.count_question} вопросов</p>
             <p className="passage__test__howmany__questions">{testInfo.time_work} минут</p>
@@ -57,6 +60,7 @@ function Passage() {
                 </Link>
             </div>
         </div>
+        </>
     )
 }
 

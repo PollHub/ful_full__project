@@ -4,6 +4,7 @@ import { StartTest } from "../api/startTest/index.js";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import Header from "../header/Header.js";
 
 function PassageQuestion() {
 
@@ -54,13 +55,21 @@ function PassageQuestion() {
             // .then(result => localStorage.setItem('question', result))
             // .then(result => setQuestionInfo(...[JSON.parse(result)]))
             .then(result => {
-                setQuestionInfo(...[JSON.parse(result)])
+                console.log(typeof(result))
                 console.log(result)
-                console.log(JSON.parse(result))
-                testId = JSON.parse(result).id
-                history.push(`/passage/${data.id}/question/${testId}`)
-                console.log(`/passage/${data.id}/question/${testId}`)
-                setUserAnswer(null)
+                if (result === JSON.stringify({'questions': "all answered"})) {
+                    // console.log('You finished test')
+                    history.push(`/passage/${data.id}/finish`)
+                } else {
+                    setQuestionInfo(...[JSON.parse(result)])
+                    // console.log(result)
+                    console.log(JSON.parse(result))
+                    testId = JSON.parse(result).id
+                    // console.log(testId)
+                    history.push(`/passage/${data.id}/question/${testId}`)
+                    // console.log(`/passage/${data.id}/question/${testId}`)
+                    setUserAnswer(null)
+                }
             })
             .catch(error => console.log('error', error));
 
@@ -72,6 +81,7 @@ function PassageQuestion() {
 
     return (
         <>
+            <Header/>
             <div className="passageQuestion">
                 <p className="passageQuestion__top__text">{testInfo.name}</p>
                 <div className="passageQuestion__block">
