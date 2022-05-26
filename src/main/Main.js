@@ -151,7 +151,7 @@ function Main() {
               <div className="main__for__user">
                 <p className="main__for__user__title">Мои дисциплины</p>
                 <div className="main__for__user__map">
-                  {teachersTests ? teachersTests.map((i,g) => {
+                  {teachersTests ? teachersTests.lenght > 0 && teachersTests.map((i,g) => {
                     return (
                       <div className="main__for__user__subjets" key={g}>
                         <p className="main__for__user__subjets__name">{i.subject}</p>

@@ -12,17 +12,22 @@ const Login = () => {
   
   let [page, setPage] = useState(0)
   let [role, stRole] = useState('')
-  console.log(role)
-
+  // console.log(role)
+  if (role === 'user') {
+    console.log('вы учитель')
+  } else if (role != 'user') {
+    console.log('Вы ученик')
+  }
+ 
   let [login, setLogin] = useState('');
-  console.log(login)
+  // console.log(login)
   let [password, setPassword] = useState('');
-  console.log(password)
+  // console.log(password)
 
   let [name, setName] = useState('');
-  console.log(name);
+  // console.log(name);
   let [surname, setSurname] = useState('');
-  console.log(surname);
+  // console.log(surname);
 
   function checkRole(className) {
     let teacher = document.querySelector('.teacher__div');
@@ -59,7 +64,6 @@ const Login = () => {
     formdata.append("username", login);
     formdata.append("password", password);
 
-  
 
     var requestOptions = {
         method: 'POST',
@@ -79,12 +83,6 @@ const Login = () => {
     // formdata.append("email", compair);
     formdata.append("password", password);
 
-    if(role === 'teacher') {
-      formdata.append('is_teacher', true);
-    } else {
-      formdata.append('is_teacher', false);
-    }
-
     formdata.append('first_name', name)
     formdata.append('second_name', surname)
 
@@ -93,7 +91,7 @@ const Login = () => {
         body: formdata,
         redirect: 'follow'
     };
-    console.log(login, password)
+    // console.log(login, password)
 
     const response_cerate_user = await fetch("https://dfssd-first.herokuapp.com/auth/users/", requestOptions)
 
@@ -132,10 +130,28 @@ const Login = () => {
         redirect: 'follow'
     };
 
+    var change_role_formdata = new FormData();
+
+    if(role === 'user') {
+      change_role_formdata.append('is_teacher', true);
+    } else if (role !== 'user') {
+      change_role_formdata.append('is_teacher', false);
+    }
+
+    var changeRoleRequestOptions = {
+      method: 'PATCH',
+      body: change_role_formdata,
+      headers: myHeaders,
+      redirect: 'follow'
+    }
+
     const change_user_data_response = await fetch(set_data_url, requestOptions)
     } else {
         console.log('bad')
     }
+
+    const change_user_role_response = await fetch('https://dfssd-first.herokuapp.com/api/accounts/set-teacher/', changeRoleRequestOptions) 
+    
 
     history.push('/profile')
         // .then(response => console.log(response))
@@ -146,7 +162,6 @@ const Login = () => {
         //         console.log('bad')
         //     }
         // })
-  
 }
 
 
@@ -252,15 +267,15 @@ const Login = () => {
                 {/* <div className="teacher__div"> */} 
                 <div className={role === 'user' ? 'teacher__div checked__role' : 'teacher__div'} onClick={() => {checkRole('student__div')}}>
                   <div className="teacher__div__text">
-                    <p className='teacher__div__title'>Пользователь</p>
-                    <p className="teacher__div__description">Решай тесты и получи больше баллов!</p>
+                    <p className='teacher__div__title'>Создатель</p>
+                    <p className="teacher__div__description">Создавай, редактируй и проходи тесты сам!</p>
                   </div>
                 </div>
                 {/* <div className="student__div"> */}
                 <div className={role === 'student' ? 'student__div checked__role' : 'student__div'} onClick={() => {checkRole('teacher__div')}}>
                   <div className="student__div__text">
-                    <p className="student__div__title">Создатель</p>
-                    <p className="student__div__description">Создавай, редактируй и проходи тесты сам!</p>
+                    <p className="student__div__title">Пользователь</p>
+                    <p className="student__div__description">Решай тесты и получи больше баллов!</p>
                   </div>
                 </div>
               </div>

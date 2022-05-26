@@ -149,7 +149,7 @@ function Create() {
         const getAccess = localStorage.getItem('acces');
         const token = (JSON.parse(getAccess).access)
 
-        console.log(testData.id)
+        console.log(testData)
 
         let forBack = []
 
