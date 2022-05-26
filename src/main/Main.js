@@ -85,35 +85,12 @@ function Main() {
         {id: 3, title: 'Математика / Тигонометрия', grade: "5/5", procent: 80}
     ])
 
+    // api/main/subject/<str:id>/
 
     return (
         <>
             <Header/>
-            {status == null ? <div className="loading_main" > <InfinitySpin color="grey" /> </div>: 
-            status === 200  ?  <div>
-            {userInfo && userInfo.is_teacher ?
-              <div className="main__for__user">
-                <p className="main__for__user__title">Мои дисциплины</p>
-                <div className="main__for__user__map">
-                  {teachersTests ? teachersTests.map((i,g) => {
-                    return (
-                      <div className="main__for__user__subjets" key={g}>
-                        <p className="main__for__user__subjets__name">{i.subject}</p>
-                        <p className="main__for__user__subjets__count">{i.count} тест</p>
-                        <button className="main__for__user__subjets__button__to">Перейти</button>
-                      </div>
-                    )
-                  })
-                  :
-                  <Link to={'/create'}><button>Создать Тест</button></Link>
-                }
-                </div>
-              </div>
-              :
-              <div>Для ученика </div>
-          }
-            </div> :
-            <>
+            {/* {!localStorage.getItem('access') && <>
                 <div className="back_logos">
                 <div className="left_top_circle">
                     <div className="left_top_circle__circle"></div>
@@ -167,8 +144,33 @@ function Main() {
                     <Link to={'/login'}><button className="main__center__button">Авторизоваться</button></Link>
                 </div>
             </div>
-            <div style={{visibility: "hidden"}} >{renderIs}</div>
-            </>
+            </>} */}
+            {status == null ? <div className="loading_main" > <InfinitySpin color="grey" /> </div>: 
+            status === 200  &&  <div>
+            {userInfo && userInfo.is_teacher ?
+              <div className="main__for__user">
+                <p className="main__for__user__title">Мои дисциплины</p>
+                <div className="main__for__user__map">
+                  {teachersTests ? teachersTests.map((i,g) => {
+                    return (
+                      <div className="main__for__user__subjets" key={g}>
+                        <p className="main__for__user__subjets__name">{i.subject}</p>
+                        <p className="main__for__user__subjets__count">{i.count} тест</p>
+                        <Link to={`forpopap/${i.subject}`}>
+                          <button className="main__for__user__subjets__button__to">Перейти</button>
+                        </Link>
+                      </div>
+                    )
+                  })
+                  :
+                  <Link to={'/create'}><button>Создать Тест</button></Link>
+                }
+                </div>
+              </div>
+              :
+              <div>Для ученика </div>
+          }
+            </div> 
             }
         </>
     )

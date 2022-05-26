@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Header from "../header/Header";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Finish = () => {
     const getAccess = localStorage.getItem('acces');
@@ -37,8 +38,8 @@ const Finish = () => {
             <Header/>
             <div className="finish__test">
                 <h1 className="passage__test__title">{testInfo.name}</h1>
-                <p>Вы ответили на {finishInfo.true_answers} из {finishInfo.count_questions}</p>
-                <button className="finish__button__passage">Вернуться на главную</button>
+                <p>Вы ответили на {finishInfo && finishInfo.true_answers} из {finishInfo && finishInfo.count_questions}</p>
+                <Link to={'/'}><button className="finish__button__passage">Вернуться на главную</button></Link>
             </div>
         </>
     )

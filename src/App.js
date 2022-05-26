@@ -8,6 +8,7 @@ import Register from "./user/Register";
 import Passage from "./passage/Passage";
 import PassageQuestion from "./passage/PassageQuestion";
 import Finish from "./passage/Finish";
+import TestForPopap from "./testForPopap/TestForPopap";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route exact path={'/passage/:id'} component={Passage}/>
             <Route exact path={'/passage/:id/question/:qid'} component={PassageQuestion}/>
             <Route exact path={'/passage/:id/finish'} component={Finish}/>
+            <Route exact path={'/forpopap/:id'} component={TestForPopap}/>
           </Switch>
         </div>
       </div>

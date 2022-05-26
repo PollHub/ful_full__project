@@ -270,7 +270,7 @@ a {
 .change__block {
   position: absolute;
   width: 710px;
-  height: 783px;
+  height: 600px;
   left: 365px;
   top: 110px;
   border: 1px solid #000;
@@ -331,11 +331,31 @@ a {
   margin-top: 8px;
   border: 2px solid #7D63AD;
   border-radius: 30px;
+  outline: none;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+  /* identical to box height */
+  color: #000000;
+}
+
+.change__block__up__input::placeholder {
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+  /* identical to box height */
+  color: #000000;
 }
 
 .save__changes__button__father {
   position: absolute;
-  left: ;
+  left: 222px;
+  margin-top: 40px;
+  cursor: pointer;
 }
 
 .save__changes__button {
@@ -2201,6 +2221,7 @@ margin-top: 24px;
   border: none;
   padding: 9px 0 10px 0;
   margin-top: 24px;
+  cursor: pointer;
 }
 
 .main__for__user__map {
@@ -2217,4 +2238,183 @@ margin-top: 24px;
   line-height: 46px;
   color: #000000;
   margin-top: 42px;
+}
+
+.forPoppaMenu {
+  padding: 0 120px;
+  /* background-color: #43C868; */
+  height: 100px;
+}
+
+.forPoppaMenuFather {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.forPoppaMenuSon {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 26px 48px 56px 48px;
+  border: 2px solid #7D63AD;
+  border-radius: 30px;
+  margin: 24px 0;
+}
+
+.forPoppaMenuSonLeftText {
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 31px;
+  /* identical to box height */
+  /* PH Purple */
+  color: #7D63AD;
+}
+
+.forPoppaMenuSonRight {
+  display: flex;
+  justify-content: space-between;
+}
+
+.forPoppaMenuSonRightBlock {
+  width: 150px;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  /* PH Green */
+  color: #43C868;
+  padding: 7px 0;
+  border: 1px solid #000;
+  text-align: center;
+  border: 2px solid #43C868;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.PopapModelWindow {
+  width: 1200px;
+  padding: 60px 60px;
+  background: #FFFFFF;
+  border-radius: 30px;
+  position: absolute;
+  left: 56px;
+  border: 1px solid #000;
+}
+
+.PopapModelWindowClose {
+  display: none;
+}
+
+.PopapModelWindowTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.PopapModelWindowTopCloseButton{
+  color: #7D63AD;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.PopapModelWindowTopTable {
+  margin: 0 auto;
+  border: none;
+}
+
+.PopapModelWindowTopTableTitle {
+  border: none;
+  padding-bottom: 42px;
+}
+
+.PopapModelWindowTopTableData {
+  text-align: center;
+  padding: 0 100px 10px 100px;
+  border-bottom: 1px solid gray;
+  border-right: 1px solid gray;
+}
+
+.PopapModelWindowTopTableDataRight {
+  text-align: center;
+  padding: 0 100px 10px 100px;
+  border-bottom: 1px solid gray;
+}
+
+.PopapModelWindowTopTableDataText {
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 31px;
+  /* identical to box height */
+  text-align: center;
+  color: #000000;
+}
+
+.PopapModelWindowTopTableTitleText {
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 31px;
+  /* identical to box height */
+  text-align: center;
+  color: #000000;
+}
+
+.PopapModelWindowTopTableDataText_time {
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 31px;
+  /* identical to box height */
+  text-align: center;
+  color: #000000;
+}
+
+.PopapModelWindowTopTableDataTextMarkBad {
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 31px;
+  /* identical to box height */
+  text-align: center;
+  /* PH Red */
+  color: #D92C2C;
+}
+
+.PopapModelWindowTopTableDataTextMarkGood {
+  font-family: 'TT Firs Neue';
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 31px;
+/* identical to box height */
+
+text-align: center;
+
+/* PH Yellow */
+
+color: #DCDF34;
+
+}
+
+.PopapModelWindowTopTableDataTextMarkExcellent {
+  font-family: 'TT Firs Neue';
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 31px;
+/* identical to box height */
+
+text-align: center;
+
+/* PH Green */
+
+color: #43C868;
+
 }

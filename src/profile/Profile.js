@@ -59,6 +59,10 @@ function Profile() {
     // let [userData, setUserData] = useState(JSON.parse(localStorage.getItem('user_data')))
     // console.log(userData);
 
+    const [nameChange, setNameChnge] = useState('')
+    const [surnameNameChange, setSurnameNameChnge] = useState('')
+    const [emailChnge, setEmailChnge] = useState('')
+
     const [status, setStatus] = useState(null);
 
     const [userImg, setUserImg] = useState(null);
@@ -114,6 +118,59 @@ function Profile() {
 
     }, [])
 
+    function changeUserDataName() {
+
+        const getAccess = localStorage.getItem('acces');
+        const token = (JSON.parse(getAccess).access)
+
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token}`);
+
+        var formdata = new FormData();
+        formdata.append("first_name", nameChange);
+        formdata.append("last_name", surnameNameChange);
+
+        var requestOptions = {
+            method: 'PATCH',
+            headers: myHeaders,
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        fetch("https://dfssd-first.herokuapp.com/api/accounts/set-username/", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    }
+
+    function changeUserMail() {
+        const getAccess = localStorage.getItem('acces');
+        const token = (JSON.parse(getAccess).access)
+
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token}`);
+
+        var formdata = new FormData();
+        formdata.append('username', emailChnge)
+
+        var requestOptions = {
+            method: 'PATCH',
+            headers: myHeaders,
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        fetch("https://dfssd-first.herokuapp.com/api/accounts/profile/", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    }
+
+    function changeUserData() {
+        changeUserDataName()
+        changeUserMail()
+    }
+
     return (
         <>
             <Header/>
@@ -162,18 +219,18 @@ function Profile() {
                 </div>
                 <div className="change__block__name">
                     <p className="change__block__up__title">Имя</p>
-                    <input className="change__block__up__input"/>
+                    <input onChange={(e) => {setNameChnge(e.target.value)}} defaultValue={userData && userData.first_name} className="change__block__up__input"/>
                 </div>
                 <div className="change__block__name">
                     <p className="change__block__up__title">Фамилия</p>
-                    <input className="change__block__up__input"/>
+                    <input onChange={(e) => {setSurnameNameChnge(e.target.value)}} defaultValue={userData && userData.last_name} className="change__block__up__input"/>
                 </div>
                 <div className="change__block__name">
                     <p className="change__block__up__title">Почта</p>
-                    <input className="change__block__up__input"/>
+                    <input onChange={(e) => {setEmailChnge(e.target.value)}} defaultValue={userInfo && userInfo.user} className="change__block__up__input"/>
                 </div>
                 <div className="save__changes__button__father">
-                    <button className="save__changes__button">Сохранить Изменения</button>
+                    <button onClick={() => {changeUserData()}} className="save__changes__button">Сохранить Изменения</button>
                 </div>
             </div>
         </div>

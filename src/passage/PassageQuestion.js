@@ -22,7 +22,8 @@ function PassageQuestion() {
 
 
     let [userAnswer, setUserAnswer] = useState(null);
-    // console.log(userAnswer)
+    console.log(userAnswer)
+    // console.log(data)
 
     function saveAnswer(name) {
         // console.log(name);
@@ -46,7 +47,7 @@ function PassageQuestion() {
             body: formdata,
             redirect: 'follow'
         };
-
+        // GN5NFTMTAJW970UY
         let testId = null
 
         fetch(`https://dfssd-first.herokuapp.com/api/test/${data.id}/questions/${data.qid}/`, requestOptions)
@@ -85,10 +86,10 @@ function PassageQuestion() {
             <div className="passageQuestion">
                 <p className="passageQuestion__top__text">{testInfo.name}</p>
                 <div className="passageQuestion__block">
-                    <p className="passageQuestion__block__num__question">Вопрос {questionInfo.id}</p>
-                    <p className="passageQuestion__block__question__text">{questionInfo.question}</p>
+                    <p className="passageQuestion__block__num__question">Вопрос {questionInfo && questionInfo.id}</p>
+                    <p className="passageQuestion__block__question__text">{questionInfo && questionInfo.question}</p>
                     <div className="passage__test__answer__block__father"> 
-                        {questionInfo.answers.map((e, g) => {
+                        {questionInfo && questionInfo.answers.map((e, g) => {
                             return (
                                 <div className="passage__test__answer__block" key={e}>
                                     {userAnswer === g ? <div onClick={() => setUserAnswer(null)} className="passage__test__answer__block__clicker__active"></div> : <div onClick={() => setUserAnswer(g)} className="passage__test__answer__block__clicker"></div>}
@@ -100,7 +101,7 @@ function PassageQuestion() {
                 </div>
                 <div className="bottom__buttons__passage__question">
                     {
-                        userAnswer 
+                        userAnswer != null
                             ? 
                         // <Link to={`/passage/${data.id}/question/${questionInfo.id}`}>
                             <button onClick={() => {next()}} className="next__button active__button__next">Ответить</button>

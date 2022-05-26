@@ -117,9 +117,9 @@ function Header() {
                             userInfo
                             ?
                             <>
-                                <Link to={'/create'}>
+                            <Link to={'/create'}>
                                     <div className="link__autorize">
-                                        Создать Тест
+                                        Создать тест
                                     </div>
                                 </Link>
                                 <Link to={'/profile'}><img className="header__profile__photo" src={`https://dfssd-first.herokuapp.com${userInfo.user_image}`}/></Link>

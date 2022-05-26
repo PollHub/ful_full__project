@@ -34,7 +34,7 @@ function Passage() {
             redirect: 'follow'
         };
 
-        fetch("https://dfssd-first.herokuapp.com/api/test/7LCUJIED2SOWE5WG/start/", requestOptions)
+        fetch(`https://dfssd-first.herokuapp.com/api/test/${data.id}/start/`, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -49,11 +49,11 @@ function Passage() {
         <>  
             <Header/>
             <div className="passage">
-            <h1 className="passage__test__title">{testInfo.name}</h1>
-            <p className="passage__test__howmany__questions">{testInfo.count_question} вопросов</p>
-            <p className="passage__test__howmany__questions">{testInfo.time_work} минут</p>
+            <h1 className="passage__test__title">{testInfo && testInfo.name}</h1>
+            <p className="passage__test__howmany__questions">{testInfo && testInfo.count_question} вопросов</p>
+            <p className="passage__test__howmany__questions">{testInfo && testInfo.time_work} минут</p>
             <div className="bottom__buttons__passage">
-                <Link onClick={() => {start()}}  to={`/passage/${data.id}/question/2`}>
+                <Link onClick={() => {start()}}  to={`/passage/${data.id}/question/${JSON.parse(localStorage.getItem('question')).id}`}>
                     <button className="bottom__buttons__passage__next">
                         Начать 
                     </button>
