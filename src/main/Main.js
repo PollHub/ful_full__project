@@ -10,6 +10,8 @@ function Main() {
     const [renderIs, setrenderIs] = useState(0);
     const [userInfo, setUserInfo] = useState("qwsedfg");
 
+    const [teachersTests, setTeacherTests] = useState();
+
     const [status, setStatus] = useState(null);
 
     const [userImg, setUserImg] = useState(null);
@@ -23,23 +25,34 @@ function Main() {
           console.log(res);
           console.log(res)
         })
-      
-      // // console.log(data)
-      // setStatus(data.status);
-      // // console.log(body);
-      // // setUserInfo(body);
-      
-      // console.log(setUserInfo)
-      //   console.log(setUserInfo)
-      //   console.log(setUserInfo)
-      //   console.log(setUserInfo)
-      //   console.log(setUserInfo)
-      //   console.log(setUserInfo)
-
-      // setUserInfo(...{body});
-      // setUserImg(body.user_image)
   }
 
+
+    function getTests() {
+      const getAccess = localStorage.getItem('acces');
+      const token = (JSON.parse(getAccess).access)
+
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${token}`);
+
+      var formdata = new FormData();
+
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        // body: formdata,
+        redirect: 'follow'
+      };
+
+      fetch("https://dfssd-first.herokuapp.com/api/main/", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          setTeacherTests(JSON.parse(result))
+          // console.log(result)
+        
+        })
+        .catch(error => console.log('error', error));
+    }
 
     useEffect(() => {
       getProfile()
@@ -57,10 +70,20 @@ function Main() {
         console.log(typeof res)
 
         setUserInfo(res)
+        getTests(res)
         setrenderIs(23)
       })
         
       }, [])
+
+      console.log(teachersTests && teachersTests)
+
+    let [counter, setCounter] = useState([
+        {id: 0, title: 'Математика / Таблица умножения 1.1', grade: "3/5", procent: 30},
+        {id: 1, title: 'Математика / Тигонометрия', grade: "5/5", procent: 100},
+        {id: 2, title: 'Математика / Тигонометрия', grade: "5/5", procent: 10},
+        {id: 3, title: 'Математика / Тигонометрия', grade: "5/5", procent: 80}
+    ])
 
 
     return (
@@ -69,15 +92,28 @@ function Main() {
             {status == null ? <div className="loading_main" > <InfinitySpin color="grey" /> </div>: 
             status === 200  ?  <div>
             {userInfo && userInfo.is_teacher ?
-              <div>Для учителя </div>
+              <div className="main__for__user">
+                <p className="main__for__user__title">Мои дисциплины</p>
+                <div className="main__for__user__map">
+                  {teachersTests ? teachersTests.map((i,g) => {
+                    return (
+                      <div className="main__for__user__subjets" key={g}>
+                        <p className="main__for__user__subjets__name">{i.subject}</p>
+                        <p className="main__for__user__subjets__count">{i.count} тест</p>
+                        <button className="main__for__user__subjets__button__to">Перейти</button>
+                      </div>
+                    )
+                  })
+                  :
+                  <Link to={'/create'}><button>Создать Тест</button></Link>
+                }
+                </div>
+              </div>
               :
               <div>Для ученика </div>
           }
-              <p>Ваши тесты</p>
             </div> :
             <>
-
-          
                 <div className="back_logos">
                 <div className="left_top_circle">
                     <div className="left_top_circle__circle"></div>

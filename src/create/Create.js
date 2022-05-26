@@ -13,6 +13,8 @@ import Header from "../header/Header";
 
 function Create() {
 
+    // let history = useHistory();
+
     let [testData, setTestData] = useState(null)
 
     function trueButton(id, blockId) {
@@ -123,7 +125,8 @@ function Create() {
         myHeaders.append("Authorization", `Bearer ${JSON.parse(acces).access}`);
 
         var formdata = new FormData();
-        formdata.append("name", subject);
+        formdata.append("name", title);
+        formdata.append("subject", subject);
 
         var requestOptions = {
             method: 'POST',
@@ -190,9 +193,12 @@ function Create() {
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
+
+    // history.push('/')
     }
 
     let [subject, setSubject] = useState('Выберите предмет');
+    console.log(subject)
 
     let [list, setList] = useState(false);
 
@@ -241,6 +247,7 @@ function Create() {
             var formdata = new FormData();
             formdata.append("name", title);
             formdata.append("subject", subject);
+            // formdata.append("subject", title);
 
             var requestOptions = {
                 method: 'POST',

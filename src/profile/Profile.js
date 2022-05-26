@@ -93,7 +93,7 @@ function Profile() {
             history.push("/login")
             return 
         }
-
+        
         const token = (JSON.parse(getAccess).access)
 
         var myHeaders = new Headers();
@@ -132,7 +132,7 @@ function Profile() {
             </div>
             <div className={"profile__last__tests"}>
                 <p className="profile__last__tests__title">Недавние тесты</p>
-                {user_tests.map(e => {
+                {user_tests && user_tests.length > 0 && user_tests.map(e => {
                     return (
                         <div key={e.id} className={e.procent < 60 ? 'profile__last__test medium__level__test' : 'profile__last__test high__level__test'}>
                             <div>
