@@ -163,6 +163,8 @@ a {
   margin-right: 19px;
   width: 164px;
   height: 164px;
+  border: 1px solid #000;
+  border-radius: 50%;
 }
 
 .profile__user__data {
@@ -227,7 +229,7 @@ a {
 }
 
 .profile__last__test__procent {
-  margin-right: 10px;
+  margin-right: 42px;
 }
 
 .profile__button__more__div {
@@ -277,12 +279,80 @@ a {
   border-radius: 30px;
 }
 
+.close__change__block__button {
+  position: absolute;
+  left: 630px;
+  top: 37px;
+  color: #7D63AD;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.close__change__block__button {
+  position: absolute;
+}
+
 .close__change__block {
   display: none;
 }
 
+.change__block__title {
+  text-align: center;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  /* identical to box height */
+  color: #000000;
+  margin-top: 24px;
+}
+
+.change__block__up__title {
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+  /* identical to box height */
+  color: #000000;
+  margin-left: 95px;
+}
 
 
+.change__block__name {
+  margin-top: 24px;
+}
+
+.change__block__up__input {
+  width: 520px;
+  padding: 17px 0 17px 30px;
+  margin-left: 95px;
+  margin-top: 8px;
+  border: 2px solid #7D63AD;
+  border-radius: 30px;
+}
+
+.save__changes__button__father {
+  position: absolute;
+  left: ;
+}
+
+.save__changes__button {
+  width: 290px;
+  background: #7D63AD;
+  border-radius: 30px;
+  border: none;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 26px;
+  /* identical to box height */
+  /* PH White */
+  color: #FFFFFF;
+  padding: 24px 0;
+}
 
 .Create {
   padding: 30px 120px 50px 120px;
@@ -1703,6 +1773,7 @@ a {
   border-radius: 30px;
   margin-right: 24px;
   color: #FFFFFF;
+  margin-top: 20px;
 }
 
 .passage {

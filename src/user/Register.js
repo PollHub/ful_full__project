@@ -35,8 +35,8 @@ export default function Register() {
   return (
     <div className="App">
       {/* <p>{acces && acces}</p> */}
-      <p>ali@example.com</p>
-      <p>1sdf456Ab</p>
+      {/* <p>ali@example.com</p> */}
+      {/* <p>1sdf456Ab</p> */}
       {/* <input placeholder="Login" onChange={(e) => {setLogin(e.target.value)}}/> */}
       {/* <input placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/> */}
       {/* <button onClick={() => {request()}}>Press</button> */}

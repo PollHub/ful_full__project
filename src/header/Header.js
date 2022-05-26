@@ -15,6 +15,7 @@ import { getProfile } from "../api/userdata";
 function Header() {
 
     const [userInfo, setUserInfo] = useState(undefined);
+    console.log(userInfo)
 
     const [status, setStatus] = useState(null);
 
@@ -32,7 +33,8 @@ function Header() {
         const body = await data.json()
         // console.log(data)
         setStatus(data.status);
-        console.log(body);
+        // console.log(body);
+        setUserInfo(body)
         // setUserImg(body.user_image)
     }
 
@@ -76,11 +78,10 @@ function Header() {
                         {/* <p style={{'fontFamily': 'revert', 'fontSize': 36}}>Главная</p> */}
                     </div>
                     <div className="header__right">
-                        <Link to={'/profile'}>
-                            {/* <img className="header__profile__photo" src={user}/> */}
-                            {/* <img className="header__profile__photo" src={JSON.parse(localStorage.getItem('userData')).user_image}/> */}
-                        </Link>
-                        {
+                        {/* <Link to={'/profile'}>
+                            <img className="header__profile__photo" src={JSON.parse(localStorage.getItem('userData')).user_image}/>
+                        </Link> */}
+                        {/* {
                             localStorage.getItem('user__image')
                             ?
                             <Link to={'/profile'}>
@@ -97,7 +98,6 @@ function Header() {
                                                 Создать Тест
                                             </div>
                                         </Link>
-                                    {/* <img src={userImg}/> */}
                                     <Link to={'/profile'}><img src={userImg && `https://dfssd-first.herokuapp.com${userImg}`}/></Link>
                                     </>
                                     :
@@ -107,10 +107,31 @@ function Header() {
                                                 Авторизоваться
                                             </div>
                                         </Link>
-                                        {/* <img src={photo22}/> */}
                                         <Link to={'/profile'}><img src={userImg && `https://dfssd-first.herokuapp.com${userImg}`}/></Link>
                                     </>
                                 }
+                            </>
+                        } */}
+                        {
+                            // userInfo && 
+                            userInfo
+                            ?
+                            <>
+                                <Link to={'/create'}>
+                                    <div className="link__autorize">
+                                        Создать Тест
+                                    </div>
+                                </Link>
+                                <Link to={'/profile'}><img className="header__profile__photo" src={`https://dfssd-first.herokuapp.com${userInfo.user_image}`}/></Link>
+                            </>
+                            :
+                            <>
+                                 <Link to={'/login'}>
+                                    <div className="link__autorize">
+                                        Авторизоваться
+                                    </div>
+                                </Link>
+                                <img src={userLogo}/>
                             </>
                         }
                     </div>

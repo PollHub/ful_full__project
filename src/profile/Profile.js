@@ -32,7 +32,7 @@ function Profile() {
             redirect: 'follow'
         };
 
-        fetch("https://dfssd-first.herokuapp.com/api/tests/", requestOptions)
+        fetch("https://dfssd-first.herokuapp.com/api/accounts/profile/None/", requestOptions)
         .then(response => response.json())
         .then(result => {
             console.log(result);
@@ -52,7 +52,7 @@ function Profile() {
     let [active, setActive] = useState(false);
 
     function show() {
-        console.log(active);
+        // console.log(active);
         setActive(!active)
     }
 
@@ -67,7 +67,7 @@ function Profile() {
     // {userData && console.log(userData)}
 
     let [userInfo, setUserInfo] = useState(undefined);
-    {userInfo && console.log(userInfo)}
+    // {userInfo && console.log(userInfo)}
 
     const getUserData = async () => {
         const data = await getProfile()
@@ -81,10 +81,6 @@ function Profile() {
         setUserImg(body.user_image)
     }
 
-    const getTestUser = async () => {
-        
-    }
-
     useEffect(() => {
 
         const getAccess = localStorage.getItem('acces');
@@ -93,7 +89,7 @@ function Profile() {
             history.push("/login")
             return 
         }
-        
+
         const token = (JSON.parse(getAccess).access)
 
         var myHeaders = new Headers();
@@ -132,16 +128,16 @@ function Profile() {
             </div>
             <div className={"profile__last__tests"}>
                 <p className="profile__last__tests__title">Недавние тесты</p>
-                {user_tests && user_tests.length > 0 && user_tests.map(e => {
+                {user_tests && user_tests.length > 0 && user_tests.map((e, g) => {
                     return (
-                        <div key={e.id} className={e.procent < 60 ? 'profile__last__test medium__level__test' : 'profile__last__test high__level__test'}>
+                        <div key={g} className={e.procent < 60 ? 'profile__last__test medium__level__test' : 'profile__last__test high__level__test'}>
                             <div>
                                 <p className="profile__last__test__title">{e.name}</p>
                             </div>
                             <div className="profile__last__test__right">
-                                <p className="profile__last__test__procent">{e.procent}%</p>
+                                <p className="profile__last__test__procent">{e.procent ? e.procent : 0}%</p>
                                 <p className="profile__last__test__level">
-                                    {e.grade}
+                                    {e.count_students ? e.count_students : 'Тест пока никто не прошел'}
                                 </p>
                             </div>
                         </div>
@@ -158,7 +154,28 @@ function Profile() {
             <div className="bottom__text">
                 <p>PollHub | 2022</p>
             </div>
-            <div className={active ? 'change__block' : 'close__change__block'}></div>
+            <div className={active ? 'change__block' : 'close__change__block'}>
+                <p className="change__block__title">Изменить профиль</p>
+                <p className="close__change__block__button" onClick={() => {show()}}>X</p>
+                <div className="change__block__up">
+                    {/* <img src={`https://dfssd-first.herokuapp.com${userInfo.user_image}`}/> */}
+                </div>
+                <div className="change__block__name">
+                    <p className="change__block__up__title">Имя</p>
+                    <input className="change__block__up__input"/>
+                </div>
+                <div className="change__block__name">
+                    <p className="change__block__up__title">Фамилия</p>
+                    <input className="change__block__up__input"/>
+                </div>
+                <div className="change__block__name">
+                    <p className="change__block__up__title">Почта</p>
+                    <input className="change__block__up__input"/>
+                </div>
+                <div className="save__changes__button__father">
+                    <button className="save__changes__button">Сохранить Изменения</button>
+                </div>
+            </div>
         </div>
         </>
     )
