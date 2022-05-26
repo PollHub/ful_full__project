@@ -8,9 +8,12 @@ import photo18 from '../img/18.png';
 import photo19 from '.././img/19.png';
 import photo20 from '.././img/20.png';
 import photo21 from '.././img/21.png';
+import Header from "../header/Header";
 
 
 function Create() {
+
+    let [testData, setTestData] = useState(null)
 
     function trueButton(id, blockId) {
         let questionBlocks = document.querySelectorAll('.create__question__block');
@@ -109,19 +112,46 @@ function Create() {
 
     // const [forBack, setForBack] = useState([])
 
-    
+    function createTest() {
+
+        let acces = localStorage.getItem('acces');
+
+        console.log(acces);
+        console.log(JSON.parse(acces).access);
+
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${JSON.parse(acces).access}`);
+
+        var formdata = new FormData();
+        formdata.append("name", subject);
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        fetch("https://dfssd-first.herokuapp.com/api/tests/", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result)
+                setTestData(result.id)
+            })
+            .catch(error => console.log('error', error));
+    }
 
     function test() {
 
         const getAccess = localStorage.getItem('acces');
         const token = (JSON.parse(getAccess).access)
-        
-        const test_id = localStorage.getItem('test_id')
-        // console.log(test_id)
+
+        console.log(testData.id)
 
         let forBack = []
 
-        let empty = {id_test: JSON.parse(test_id), question: '', id_true_answer: null, answers: []};
+        let empty = {id_test: testData, question: '', id_true_answer: null, answers: []};
+
 
         answerCounter.map((i) => {
             // console.log(i)
@@ -130,13 +160,14 @@ function Create() {
             i.answers.map((e, g) => {
                 if (e.id === i.true__answer) {
                     empty.id_true_answer = g
+                    empty.id_test = testData
                 }
             })
             i.answers.map((a) => {
                 empty.answers.push(a.name)
             })
             forBack.push(empty)
-            empty = {id_test: JSON.parse(test_id), question: '', id_true_answer: null, answers: []};
+            empty = {id_test: testData, question: '', id_true_answer: null, answers: []};
         })
 
         var myHeaders = new Headers();
@@ -145,13 +176,14 @@ function Create() {
 
     var raw = JSON.stringify(forBack);
 
+    console.log(testData);
     console.log(raw)
 
     var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
     };
 
     fetch("https://dfssd-first.herokuapp.com/api/tests/post_all_questions/", requestOptions)
@@ -251,252 +283,271 @@ function Create() {
         //         }
         //     })
         // })
-        test()
+        // test()
+        setSettingsActive(true)
     }
 
-    if (page === 0) {
-        return (
-            <div className="Create">
-                <p className="create__title">Создание теста</p>
-                {
-                    list === false 
-                    ?
-                    <div className="first__create__upper">
-                        <p className="discipline__name">Название дисциплины</p>
-                        <div className="form-group">
-                            <div className="form-group-block">
-                                <div className="form-group-left">
-                                    <p>{subject}</p>
-                                </div>
-                                <div className="form-group-right">
-                                    <img className="form-group-right-img" src={photo19} onClick={() => {
-                                        setList(true)
-                                    }}/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    :
-                    <>
-                        <p className="discipline__name">Название дисциплины</p>
-                        <div className="form__group__list">
-                            <div className="form__group__list__top">
-                                <div className="form__group__list__top__left">
-                                    <p>{subject}</p>
-                                </div>
-                                <div className="form__group__list__top__right">
-                                    <img className="form-group-right-img" src={photo19} onClick={() => {
-                                        setList(false)
-                                    }}/>
-                                </div>
-                            </div>
-                            <div className="form__group__list__list">
-                                {subjects.map((i) => {
-                                    return (
-                                        <p onClick={() => {setSubject(i)}} key={i} className="form__group__list__list__text">{i}</p>
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </>
-                }
-                <div className="test__name__block">
-                    <p className="test__name">Название теста</p>
-                    <input onChange={(e) => setTitle(e.target.value)} className="name__test__input" placeholder="Ретушь фотографий 1.1"/>
-                </div>
-                {/* <div className="first__bottom__buttons">
-                        {
-                            title === '' && subject != 'Выберите предмет'
-                            ?
-                            <button disabled className="next__button can" onClick={() => {firstSetPage()}}>
-                                Далее
-                            </button>
-                            :
-                            <button className="next__button" onClick={() => {firstSetPage()}}>
-                                Далее
-                            </button>
-                        }
-                </div> */}
-                <button className="next__button" onClick={() => {firstSetPage()}}>Далее</button>
-            </div>
-        )
-    } else if (page === 1) {
-        return(
-            <>
-            {settingsActive && <div className="test__settings__block__father">
-            <div className={settingsActive ? 'test__settings__block' : 'close__test__settings__block'}>
-                    <div className="test__settings__block__top">
-                        <p className="test__settings__block__top__title">Настройки теста</p>
-                        <img src={photo20} onClick={() => {setSettingsActive(false)}} className="test__settings__block__top__close"/>
-                    </div>
-                    <div className="pass__question__checkbox">
-                        <div className="pass__question__checkbox__left">
-                            <p className="pass__question__checkbox__text">
-                                Пропустить задание
-                            </p>
-                        </div>
-                        <div className="pass__question__checkbox__right">
-                            <input onClick={() => {setPassTask(!passTask)}} className="pass__question__checkbox__input" type="checkbox"/>
-                            <p className="under__checkbox__text under__checkbox__text__margin">{passTask ? 'Вкл' : 'Выкл'}</p>
-                        </div>
-                    </div>
-                    <div className="editing__test__checkbox">
-                        <div className="editing__test__checkbox__left">
-                            <p className="editing__test__checkbox__text">Редактирование</p>
-                        </div>
-                        <div className="editing__test__checkbox__right">
-                            <input className="editing__test__checkbox__input" type="checkbox"/>
-                            <p className="under__checkbox__text under__checkbox__text__margin">Выкл</p>
-                        </div>
-                    </div>
-                    <div className="timer__test__checkbox">
-                        <div className="timer__test__checkbox__left">
-                            <p className="timer__test__checkbox__left__text">Таймер</p>
-                        </div>
-                        <div className="timer__test__checkbox__right">
-                            <input onClick={() => {setTimerTest(!timerTest)}} className="timer__test__checkbox__right__input" type="checkbox"/>
-                            <p className="under__checkbox__text">{timerTest ? "Вкл" : "Выкл"}</p>
-                        </div>
-                    </div>
-                    <div className="mix__test__checkbox">
-                        <div className="mix__test__checkbox__left">
-                            <p className="mix__test__checkbox__left__text">Перемешать вопросы</p>
-                        </div>
-                        <div className="mix__test__checkbox__right">
-                            <input onClick={() => {setMixTest(!mixTest)}} className="mix__test__checkbox__right__input" type="checkbox"/>
-                            <p className="under__checkbox__text">{mixTest ? 'Вкл' : 'Выкл'}</p>
-                        </div>
-                    </div>
-                    <div className={timerTest ? 'timer__test__checkbox__setting' : "timer__test__checkbox__setting__close"}>
-                        <div className="timer__test__checkbox__setting__left">
-                            <p className="timer__test__checkbox__setting__left__text">45 минут</p>
-                        </div>
-                        <div className="timer__test__checkbox__setting__right">
-                            <img src={photo21}/>
-                        </div>
-                    </div>
-                    <div className={mixTest ? 'mix__test__checkbox__setting' : 'mix__test__checkbox__setting__close'}>
-                        <input className="mix__test__checkbox__setting__input" placeholder="0"/>
-                        <p className="mix__test__checkbox__setting__text">из {answerCounter.length}</p>
-                    </div>
-                    <div className="number__attempts">
-                        <div className="number__attempts__left">
-                            <p className="number__attempts__left__text">Количество попыток</p>
-                        </div>
-                        <div className="number__attempts__right">
-                            <div className="number__attempts__right__list">
-                                <p className="number__attempts__right__list__left">Неограничено</p>
-                                <img src={photo21}/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="number__attempts">
-                        <div className="number__attempts__left">
-                            <p className="number__attempts__left__text">Система оценивания</p>
-                        </div>
-                        <div className="number__attempts__right">
-                            <div className="number__attempts__right__list">
-                                <p className="number__attempts__right__list__left">Многоуровневая</p>
-                                <img src={photo21}/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="marks">
-                        <div className="marks__one">
-                            <div className="marks__one__left">
-                                <div className="marks__one__left__text">Отлично</div>
-                            </div>
-                            <div className="marks__one__right">
-                                <p className="marks__one__right__text">от</p>
-                                <input className="marks__one__right__from__input" placeholder="90"/>
-                                <p className="marks__one__right__text__to">до</p>
-                                <input className="marks__one__right__from__input" placeholder="100"/>
-                                <p className="marks__one__right__text__last">баллов</p>
-                            </div>
-                        </div>
-                        <div className="marks__one">
-                            <div className="marks__one__left">
-                                <div className="marks__one__left__text">Хорошо</div>
-                            </div>
-                            <div className="marks__one__right">
-                                <p className="marks__one__right__text">от</p>
-                                <input className="marks__one__right__from__input" placeholder="70"/>
-                                <p className="marks__one__right__text__to">до</p>
-                                <input className="marks__one__right__from__input" placeholder="89"/>
-                                <p className="marks__one__right__text__last">баллов</p>
-                            </div>
-                        </div>
-                        <div className="marks__one">
-                            <div className="marks__one__left">
-                                <div className="marks__one__left__text">Удовлетвортительно</div>
-                            </div>
-                            <div className="marks__one__right">
-                                <p className="marks__one__right__text">от</p>
-                                <input className="marks__one__right__from__input" placeholder="50"/>
-                                <p className="marks__one__right__text__to">до</p>
-                                <input className="marks__one__right__from__input" placeholder="69"/>
-                                <p className="marks__one__right__text__last">баллов</p>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            </div>}
+    {   
+        if (page === 0) {
+            return (
+                <>
+                    <Header/>
                 <div className="Create">
                     <p className="create__title">Создание теста</p>
-                    {answerCounter.map((i, g) => {
-                        return (
-                        <div id={i.id} key={i.id} className="create__question__block">
-                        <div className="create__question__block__top">
-                            <p>Вопрос {g+1}</p>
-                            <img onClick={() => DelQuestion(i.id)} src={closeImg} className="close__create__block"/>
-                        </div>
-                            <div className="create__question__block__inputs">
-                                <input onChange={(g) => {questionText(i.id, g.target.value)}} className="create__question__block__inputs__input" placeholder={i.title}/>
-                                <select className="create__question__block__inputs__select">
-                                    <option>Один вариант ответа</option>
-                                    <option>Несколько вариантов ответа</option>
-                                </select>
-                            </div>
-                            <div className="create__question__block__answers">
-                                {i.answers.map((e, g) => {
-                                    return (
-                                        <div id={e.id} key={e.id} className={e.id === i.true__answer ? 'create__question__block__answers__answer__correct' : 'create__question__block__answers__answer'}>
-                                            <div className="create__question__block__answers__answer__left">
-                                                {/* <img src={answer}/> */}
-                                                <div onClick={() => trueButton(e.id, i.id)}>
-                                                </div>
-                                                <input onChange={(g) => {text(e.id, i.id, g.target.value)}} placeholder={e.name}/>
-                                            </div>
-                                            <div className="create__question__block__answers__answer__right">
-                                                <img onClick={() => DelAnswer(e.id, i.id)} src={closeImg}/>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                            <div className="create__question__block__bottom">
-                                <button onClick={() => addAnswer(i.id)} className="create__question__block__bottom__left">
-                                    Добавить
-                                </button>
-                                <div className="create__question__block__bottom__right">
-                                    <img onClick={() => {console
-                                    .log(answerCounter)}} className="create__question__block__bottom__right__img" src={photo17}/>
-                                    <img src={photo18}/>
+                    {
+                        list === false 
+                        ?
+                        <div className="first__create__upper">
+                            <p className="discipline__name">Название дисциплины</p>
+                            <div className="form-group">
+                                <div className="form-group-block">
+                                    <div className="form-group-left">
+                                        <p>{subject}</p>
+                                    </div>
+                                    <div className="form-group-right">
+                                        <img className="form-group-right-img" src={photo19} onClick={() => {
+                                            setList(true)
+                                        }}/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        )
-                    })}
-                    <div className="addButton">
-                        <img src={addButton} onClick={() => {addQuestion()}}/>
+                        :
+                        <>
+                            <p className="discipline__name">Название дисциплины</p>
+                            <div className="form__group__list">
+                                <div className="form__group__list__top">
+                                    <div className="form__group__list__top__left">
+                                        <p>{subject}</p>
+                                    </div>
+                                    <div className="form__group__list__top__right">
+                                        <img className="form-group-right-img" src={photo19} onClick={() => {
+                                            setList(false)
+                                        }}/>
+                                    </div>
+                                </div>
+                                <div className="form__group__list__list">
+                                    {subjects.map((i) => {
+                                        return (
+                                            <p onClick={() => {setSubject(i)}} key={i} className="form__group__list__list__text">{i}</p>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </>
+                    }
+                    <div className="test__name__block">
+                        <p className="test__name">Название теста</p>
+                        <input onChange={(e) => setTitle(e.target.value)} className="name__test__input" placeholder="Ретушь фотографий 1.1"/>
                     </div>
+                    {/* <div className="first__bottom__buttons">
+                            {
+                                title === '' && subject != 'Выберите предмет'
+                                ?
+                                <button disabled className="next__button can" onClick={() => {firstSetPage()}}>
+                                    Далее
+                                </button>
+                                :
+                                <button className="next__button" onClick={() => {firstSetPage()}}>
+                                    Далее
+                                </button>
+                            }
+                    </div> */}
+                    <button className="next__button" onClick={() => {
+                        // Создаём тест 
+                        console.log(testData);
+                        console.log(testData === null);
+                        if (testData === null) {
+                            createTest()
+                        }
+                        firstSetPage()
+                        }}>Далее</button>
                 </div>
-                <div className="bottom__buttons">
-                    <button className="backk__button" onClick={() => setPage(0)}>Назад</button>
-                    <button className="next__button" onClick={() => openSettings()}>Далее</button>
-                </div>
-            </>
-        )
+                </>
+            )
+        } else if (page === 1) {
+            return(
+                <>
+                    <Header/>
+                    {settingsActive && <div className="test__settings__block__father">
+                    <div className={settingsActive ? 'test__settings__block' : 'close__test__settings__block'}>
+                            <div className="test__settings__block__top">
+                                <p className="test__settings__block__top__title">Настройки теста</p>
+                                <img src={photo20} onClick={() => {setSettingsActive(false)}} className="test__settings__block__top__close"/>
+                            </div>
+                            <div className="pass__question__checkbox">
+                                <div className="pass__question__checkbox__left">
+                                    <p className="pass__question__checkbox__text">
+                                        Пропустить задание
+                                    </p>
+                                </div>
+                                <div className="pass__question__checkbox__right">
+                                    <input onClick={() => {setPassTask(!passTask)}} className="pass__question__checkbox__input" type="checkbox"/>
+                                    <p className="under__checkbox__text under__checkbox__text__margin">{passTask ? 'Вкл' : 'Выкл'}</p>
+                                </div>
+                            </div>
+                            <div className="editing__test__checkbox">
+                                <div className="editing__test__checkbox__left">
+                                    <p className="editing__test__checkbox__text">Редактирование</p>
+                                </div>
+                                <div className="editing__test__checkbox__right">
+                                    <input className="editing__test__checkbox__input" type="checkbox"/>
+                                    <p className="under__checkbox__text under__checkbox__text__margin">Выкл</p>
+                                </div>
+                            </div>
+                            <div className="timer__test__checkbox">
+                                <div className="timer__test__checkbox__left">
+                                    <p className="timer__test__checkbox__left__text">Таймер</p>
+                                </div>
+                                <div className="timer__test__checkbox__right">
+                                    <input onClick={() => {setTimerTest(!timerTest)}} className="timer__test__checkbox__right__input" type="checkbox"/>
+                                    <p className="under__checkbox__text">{timerTest ? "Вкл" : "Выкл"}</p>
+                                </div>
+                            </div>
+                            <div className="mix__test__checkbox">
+                                <div className="mix__test__checkbox__left">
+                                    <p className="mix__test__checkbox__left__text">Перемешать вопросы</p>
+                                </div>
+                                <div className="mix__test__checkbox__right">
+                                    <input onClick={() => {setMixTest(!mixTest)}} className="mix__test__checkbox__right__input" type="checkbox"/>
+                                    <p className="under__checkbox__text">{mixTest ? 'Вкл' : 'Выкл'}</p>
+                                </div>
+                            </div>
+                            <div className={timerTest ? 'timer__test__checkbox__setting' : "timer__test__checkbox__setting__close"}>
+                                <div className="timer__test__checkbox__setting__left">
+                                    <p className="timer__test__checkbox__setting__left__text">45 минут</p>
+                                </div>
+                                <div className="timer__test__checkbox__setting__right">
+                                    <img src={photo21}/>
+                                </div>
+                            </div>
+                            <div className={mixTest ? 'mix__test__checkbox__setting' : 'mix__test__checkbox__setting__close'}>
+                                <input className="mix__test__checkbox__setting__input" placeholder="0"/>
+                                <p className="mix__test__checkbox__setting__text">из {answerCounter.length}</p>
+                            </div>
+                            <div className="number__attempts">
+                                <div className="number__attempts__left">
+                                    <p className="number__attempts__left__text">Количество попыток</p>
+                                </div>
+                                <div className="number__attempts__right">
+                                    <div className="number__attempts__right__list">
+                                        <p className="number__attempts__right__list__left">Неограничено</p>
+                                        <img src={photo21}/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="number__attempts">
+                                <div className="number__attempts__left">
+                                    <p className="number__attempts__left__text">Система оценивания</p>
+                                </div>
+                                <div className="number__attempts__right">
+                                    <div className="number__attempts__right__list">
+                                        <p className="number__attempts__right__list__left">Многоуровневая</p>
+                                        <img src={photo21}/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="marks">
+                                <div className="marks__one">
+                                    <div className="marks__one__left">
+                                        <div className="marks__one__left__text">Отлично</div>
+                                    </div>
+                                    <div className="marks__one__right">
+                                        <p className="marks__one__right__text">от</p>
+                                        <input className="marks__one__right__from__input" placeholder="90"/>
+                                        <p className="marks__one__right__text__to">до</p>
+                                        <input className="marks__one__right__from__input" placeholder="100"/>
+                                        <p className="marks__one__right__text__last">баллов</p>
+                                    </div>
+                                </div>
+                                <div className="marks__one">
+                                    <div className="marks__one__left">
+                                        <div className="marks__one__left__text">Хорошо</div>
+                                    </div>
+                                    <div className="marks__one__right">
+                                        <p className="marks__one__right__text">от</p>
+                                        <input className="marks__one__right__from__input" placeholder="70"/>
+                                        <p className="marks__one__right__text__to">до</p>
+                                        <input className="marks__one__right__from__input" placeholder="89"/>
+                                        <p className="marks__one__right__text__last">баллов</p>
+                                    </div>
+                                </div>
+                                <div className="marks__one">
+                                    <div className="marks__one__left">
+                                        <div className="marks__one__left__text">Удовлетвортительно</div>
+                                    </div>
+                                    <div className="marks__one__right">
+                                        <p className="marks__one__right__text">от</p>
+                                        <input className="marks__one__right__from__input" placeholder="50"/>
+                                        <p className="marks__one__right__text__to">до</p>
+                                        <input className="marks__one__right__from__input" placeholder="69"/>
+                                        <p className="marks__one__right__text__last">баллов</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="settings__bottom__buttons">
+                                    <button onClick={() => {setSettingsActive(false)}} className="back__settings__button">Назад</button>
+                                    <button onClick={() => {test()}} className="setting__save__button">Сохранить</button>
+                            </div>
+                    </div>
+                    </div>}
+                    <div className="Create">
+                        <p className="create__title">Создание теста</p>
+                        {answerCounter.map((i, g) => {
+                            return (
+                            <div id={i.id} key={i.id} className="create__question__block">
+                            <div className="create__question__block__top">
+                                <p>Вопрос {g+1}</p>
+                                <img onClick={() => DelQuestion(i.id)} src={closeImg} className="close__create__block"/>
+                            </div>
+                                <div className="create__question__block__inputs">
+                                    <input onChange={(g) => {questionText(i.id, g.target.value)}} className="create__question__block__inputs__input" placeholder={i.title}/>
+                                    <select className="create__question__block__inputs__select">
+                                        <option>Один вариант ответа</option>
+                                        <option>Несколько вариантов ответа</option>
+                                    </select>
+                                </div>
+                                <div className="create__question__block__answers">
+                                    {i.answers.map((e, g) => {
+                                        return (
+                                            <div id={e.id} key={e.id} className={e.id === i.true__answer ? 'create__question__block__answers__answer__correct' : 'create__question__block__answers__answer'}>
+                                                <div className="create__question__block__answers__answer__left">
+                                                    {/* <img src={answer}/> */}
+                                                    <div onClick={() => trueButton(e.id, i.id)}>
+                                                    </div>
+                                                    <input onChange={(g) => {text(e.id, i.id, g.target.value)}} placeholder={e.name}/>
+                                                </div>
+                                                <div className="create__question__block__answers__answer__right">
+                                                    <img onClick={() => DelAnswer(e.id, i.id)} src={closeImg}/>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                                <div className="create__question__block__bottom">
+                                    <button onClick={() => addAnswer(i.id)} className="create__question__block__bottom__left">
+                                        Добавить
+                                    </button>
+                                    <div className="create__question__block__bottom__right">
+                                        <img onClick={() => {console
+                                        .log(answerCounter)}} className="create__question__block__bottom__right__img" src={photo17}/>
+                                        <img src={photo18}/>
+                                    </div>
+                                </div>
+                            </div>
+                            )
+                        })}
+                        <div className="addButton">
+                            <img src={addButton} onClick={() => {addQuestion()}}/>
+                        </div>
+                    </div>
+                    <div className="bottom__buttons">
+                        <button className="backk__button" onClick={() => setPage(0)}>Назад</button>
+                        <button className="next__button__two" onClick={() => openSettings()}>Далее</button>
+                    </div>
+                </>
+            )
+        }
     }
 }
 

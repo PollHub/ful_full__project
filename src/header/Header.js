@@ -19,7 +19,7 @@ function Header() {
     const [status, setStatus] = useState(null);
 
     const [userImg, setUserImg] = useState(null);
-    // console.log(status)
+    console.log(userImg)
 
     useEffect(() => {
         if (!userInfo) {
@@ -33,7 +33,7 @@ function Header() {
         // console.log(data)
         setStatus(data.status);
         console.log(body);
-        setUserImg(body.user_image)
+        // setUserImg(body.user_image)
     }
 
     return (
@@ -98,7 +98,7 @@ function Header() {
                                             </div>
                                         </Link>
                                     {/* <img src={userImg}/> */}
-                                    <Link to={'/profile'}><img src={photo22}/></Link>
+                                    <Link to={'/profile'}><img src={userImg && `https://dfssd-first.herokuapp.com${userImg}`}/></Link>
                                     </>
                                     :
                                     <>
@@ -107,7 +107,8 @@ function Header() {
                                                 Авторизоваться
                                             </div>
                                         </Link>
-                                        <img src={photo22}/>
+                                        {/* <img src={photo22}/> */}
+                                        <Link to={'/profile'}><img src={userImg && `https://dfssd-first.herokuapp.com${userImg}`}/></Link>
                                     </>
                                 }
                             </>

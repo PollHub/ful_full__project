@@ -19,8 +19,8 @@ function App() {
             <Route exact path={'/'} component={Main}/>
             <Route exact path={'/profile'} component={Profile}/>
             <Route exact path={'/create'} component={Create}/>
-            <Route exact path={'/login'} component={Login}/>
-            <Route exact path={'/register'} component={Register}/>
+            <Route exact path={'/register'} component={Login}/>
+            <Route exact path={'/login'} component={Register}/>
             <Route exact path={'/passage/:id'} component={Passage}/>
             <Route exact path={'/passage/:id/question/:qid'} component={PassageQuestion}/>
             <Route exact path={'/passage/:id/finish'} component={Finish}/>

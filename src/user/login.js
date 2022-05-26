@@ -2,18 +2,27 @@ import React from "react";
 import { useState } from "react";
 import logo from '../img/PollHub.svg';
 import { Link } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const Login = () => {
 
-    
-    let [page, setPage] = useState(0)
+  let id = useParams();
+
+  const history = useHistory()
+  
+  let [page, setPage] = useState(0)
   let [role, stRole] = useState('')
+  console.log(role)
 
   let [login, setLogin] = useState('');
+  console.log(login)
   let [password, setPassword] = useState('');
+  console.log(password)
 
   let [name, setName] = useState('');
+  console.log(name);
   let [surname, setSurname] = useState('');
+  console.log(surname);
 
   function checkRole(className) {
     let teacher = document.querySelector('.teacher__div');
@@ -50,6 +59,8 @@ const Login = () => {
     formdata.append("username", login);
     formdata.append("password", password);
 
+  
+
     var requestOptions = {
         method: 'POST',
         body: formdata,
@@ -62,11 +73,20 @@ const Login = () => {
         .catch(error => alert('Что-то не верно'));
 }
 
-  function request() {
+  const request = async () => {
     var formdata = new FormData();
     formdata.append("username", login);
     // formdata.append("email", compair);
     formdata.append("password", password);
+
+    if(role === 'teacher') {
+      formdata.append('is_teacher', true);
+    } else {
+      formdata.append('is_teacher', false);
+    }
+
+    formdata.append('first_name', name)
+    formdata.append('second_name', surname)
 
     var requestOptions = {
         method: 'POST',
@@ -75,15 +95,58 @@ const Login = () => {
     };
     console.log(login, password)
 
-    fetch("https://dfssd-first.herokuapp.com/auth/users/", requestOptions)
+    const response_cerate_user = await fetch("https://dfssd-first.herokuapp.com/auth/users/", requestOptions)
+
+    if (response_cerate_user.status === 201) {
+      var formdata = new FormData();
+      formdata.append("username", login);
+      formdata.append("password", password);
+
+      var requestOptions = {
+          method: 'POST',
+          body: formdata,
+          redirect: 'follow'
+      };
+
+    const get_token_response = await fetch("https://dfssd-first.herokuapp.com/auth/jwt/create/", requestOptions)
+
+    const get_token_body = await get_token_response.json()
+
+    localStorage.setItem('acces', JSON.stringify(get_token_body))
+
+    //  Изменение данных человека
+    
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${get_token_body.access}`);
+
+    const set_data_url = "https://dfssd-first.herokuapp.com/api/accounts/set-username/"
+
+    var set_user_data_formdata = new FormData();
+    set_user_data_formdata.append('first_name', name)
+    set_user_data_formdata.append('last_name', surname)
+
+    var requestOptions = {
+        method: 'PATCH',
+        body: set_user_data_formdata,
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    const change_user_data_response = await fetch(set_data_url, requestOptions)
+    } else {
+        console.log('bad')
+    }
+
+    history.push('/profile')
         // .then(response => console.log(response))
-        .then(response => {
-            if (response.status === 201) {
-                AddLog(login, password);
-            } else {
-                console.log('bad')
-            }
-        })
+        // .then(response => {
+        //     if (response.status === 201) {
+        //         AddLog(login, password);
+        //     } else {
+        //         console.log('bad')
+        //     }
+        // })
+  
 }
 
 
@@ -125,8 +188,8 @@ const Login = () => {
                 <div className="logform needs-validation">
                   <div className="text_poll">PollHub</div>
                   <div className="dop_text">
-                    <Link className="textrega" to={'/login'}>Регистрация</Link>
-                    <Link className="textreg" to={'/register'}>Вход</Link>
+                    <Link className="textrega under_link_border" to={'/register'}>Регистрация</Link>
+                    <Link className="textreg" to={'/login'}>Вход</Link>
                   </div>
                   <div className="inputtype">
                     <input defaultValue={login} type="login" placeholder="E-mail" className="inputPassword" id="exampleInputEmail1" onChange={(e) => { setLogin(e.target.value) }} />
@@ -185,7 +248,7 @@ const Login = () => {
                 <a className="textreg" href="log-in" >Вход</a>
               </div>
               <div className="inputtype">
-                <p className="secondPageTitle" onClick={() => {check()}}>Выберите свою цель</p>
+                <p className="secondPageTitle" onClick={() => {check()}}>Выберите свою роль</p>
                 {/* <div className="teacher__div"> */} 
                 <div className={role === 'user' ? 'teacher__div checked__role' : 'teacher__div'} onClick={() => {checkRole('student__div')}}>
                   <div className="teacher__div__text">

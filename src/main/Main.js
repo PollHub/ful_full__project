@@ -1,39 +1,83 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getProfile } from "../api/userdata/index.js";
 import Header from "../header/Header.js";
 
+import { InfinitySpin } from "react-loader-spinner"
+
 function Main() {
 
-    const [userInfo, setUserInfo] = useState(undefined);
+    const [renderIs, setrenderIs] = useState(0);
+    const [userInfo, setUserInfo] = useState("qwsedfg");
 
     const [status, setStatus] = useState(null);
 
     const [userImg, setUserImg] = useState(null);
     // console.log(status)
 
-    useEffect(() => {
-        if (!userInfo) {
-            getUserData()
-        }
-    }, [])
 
-    const getUserData = async () => {
-        const data = await getProfile()
-        const body = await data.json()
-        console.log(data)
-        setStatus(data.status);
-        console.log(body);
-        setUserImg(body.user_image)
-    }
+    const getUserData = () => {
+      getProfile()
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          console.log(res)
+        })
+      
+      // // console.log(data)
+      // setStatus(data.status);
+      // // console.log(body);
+      // // setUserInfo(body);
+      
+      // console.log(setUserInfo)
+      //   console.log(setUserInfo)
+      //   console.log(setUserInfo)
+      //   console.log(setUserInfo)
+      //   console.log(setUserInfo)
+      //   console.log(setUserInfo)
+
+      // setUserInfo(...{body});
+      // setUserImg(body.user_image)
+  }
+
+
+    useEffect(() => {
+      getProfile()
+      .then(res => {
+          setStatus(res.status)
+          return res.json()
+        })
+      .then(res => {
+        console.log(res);
+        
+        console.log("res")
+        console.log(res)
+        console.log(res)
+        console.log(res)
+        console.log(typeof res)
+
+        setUserInfo(res)
+        setrenderIs(23)
+      })
+        
+      }, [])
+
 
     return (
         <>
             <Header/>
-            {status === 200 
-                ? 
-            <div><p>Ваши тесты</p></div>
-            :
+            {status == null ? <div className="loading_main" > <InfinitySpin color="grey" /> </div>: 
+            status === 200  ?  <div>
+            {userInfo && userInfo.is_teacher ?
+              <div>Для учителя </div>
+              :
+              <div>Для ученика </div>
+          }
+              <p>Ваши тесты</p>
+            </div> :
             <>
+
+          
                 <div className="back_logos">
                 <div className="left_top_circle">
                     <div className="left_top_circle__circle"></div>
@@ -84,9 +128,10 @@ function Main() {
                 <div className="main__center">
                     <p className="main__center__first__text">Добро пожаловать в PollHub</p>
                     <p className="main__center__second__text">Войдите или зарегистрируйтесь на нашей платформе</p>
-                    <button className="main__center__button">Авторизоваться</button>
+                    <Link to={'/login'}><button className="main__center__button">Авторизоваться</button></Link>
                 </div>
             </div>
+            <div style={{visibility: "hidden"}} >{renderIs}</div>
             </>
             }
         </>

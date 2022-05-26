@@ -47,7 +47,7 @@ body {
 .header__right {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: -10px;
 }
 
 .header__logo {
@@ -249,9 +249,12 @@ a {
 
 .bottom__text {
   margin: 0 auto;
-  margin-bottom: 20px;
-  margin-top: 15px;
-  text-align: center;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 695px;
 }
 
 .high__level__test {
@@ -460,6 +463,7 @@ a {
   color: #C4C4C4;
   outline: none;
   padding: 15px 16px 15px 36px;
+  color: #7D63AD;
 }
 
 .name__test__input::placeholder {
@@ -491,7 +495,9 @@ a {
   line-height: 31px;
   color: #FFFFFF;
   cursor: pointer;
-  margin-bottom: 20px
+  /* position: absolute;
+  bottom: 0; */
+  margin-bottom: 15px;
 }
 
 .next__button {
@@ -513,8 +519,67 @@ a {
   right: 120px;
 }
 
+.next__button__two {
+  width: 404px;
+  height: 82px;
+  background: #C4C4C4;
+  border-radius: 30px;
+  border: none;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  color: #FFFFFF;
+  cursor: pointer;
+  margin-bottom: 20px;
+  /* position: absolute;
+  bottom: 0; */
+  right: 120px;
+}
+
 .active__button__next {
   background-color: #7D63AD;
+}
+
+.settings__bottom__buttons {
+  padding: 0 120px;
+  display: flex;
+  justify-content: space-between;
+  /* margin-top: 130px; */
+}
+
+.back__settings__button {
+  width: 404px;
+  height: 82px;
+  background: #C4C4C4;
+  border-radius: 30px;
+  border: none;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  color: #FFFFFF;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.setting__save__button {
+  width: 404px;
+  height: 82px;
+  background: #7D63AD;
+  border-radius: 30px;
+  border: none;
+  font-family: 'TT Firs Neue';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  color: #FFFFFF;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-left: 20px;
 }
 
 .bottom__buttons {
@@ -683,7 +748,8 @@ a {
 
 .test__settings__block {
   width: 900px;
-  padding: 48px;
+  /* padding: 48px; */
+  padding: 10px 48px;
   background: #FFFFFF;
   border-radius: 30px;
   border: 1px solid #000;
@@ -1993,18 +2059,29 @@ margin-top: 24px;
   border: none;
 
   font-family: 'TT Firs Neue';
-font-style: normal;
-font-weight: 500;
-font-size: 24px;
-line-height: 31px;
-/* identical to box height */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 31px;
+  /* identical to box height */
+  /* PH White */
+  color: #FFFFFF;
+  position: absolute;
+  bottom: 0;
+  right: 120px;
+  margin-bottom: 30px;
+}
 
+.under_link_border {
+  border-bottom: 2px solid #7D63AD;
+  padding-bottom: 1px;
+}
 
-/* PH White */
+.loading_main {
+  width: 100%;
+  height: calc(100vh - 80px);
 
-color: #FFFFFF;
-position: absolute;
-bottom: 0;
-right: 120px;
-margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
